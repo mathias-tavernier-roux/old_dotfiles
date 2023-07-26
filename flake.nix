@@ -1,5 +1,5 @@
 {
-  description = "Sigma dotfiles";
+  description = "Pikatsuto dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
