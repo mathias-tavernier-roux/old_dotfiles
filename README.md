@@ -84,7 +84,7 @@ sudo nixos-rebuild switch --flake '.'
   <tr>
     <td align="center">
       <samp>
-        This color scheme is inspired from
+        This color scheme is OneDark
         <a href="https://github.com/catppuccin/catppuccin">Catppuccin Mocha</a>
       </samp>
     </td>
@@ -92,11 +92,6 @@ sudo nixos-rebuild switch --flake '.'
 </table>
 
 ![tty](assets/screenshots/palette.png)
-
-| Black    | Red      | Green    | Yellow   | Blue     | Magenta  | Cyan     | White    |
-|----------|----------|----------|----------|----------|----------|----------|----------|
-| `0F0F1C` | `D22942` | `17B67C` | `F2A174` | `8B8AF1` | `D78AF1` | `4FCFEB` | `B4C0EC` |
-| `1A1C31` | `DE4259` | `3FD7A0` | `EEC09F` | `A7A5FB` | `E5A5FB` | `82E3F8` | `CAD3F5` |
 
 [^clone_as_home]:
     Cloning as the home directory
