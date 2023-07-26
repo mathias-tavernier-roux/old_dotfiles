@@ -85,7 +85,7 @@ sudo nixos-rebuild switch --flake '.'
     <td align="center">
       <samp>
         This color scheme is OneDark
-        <a href="https://github.com/catppuccin/catppuccin">Catppuccin Mocha</a>
+        <a href="https://github.com/joshdick/onedark.vim">OneDark</a>
       </samp>
     </td>
   </tr>
