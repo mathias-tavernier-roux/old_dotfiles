@@ -1,0 +1,23 @@
+#!/bin/sh
+
+menu(){
+	printf "Sink\n"
+	printf "Source\n"
+}
+
+main() {
+	choice=$(menu | rofi -dmenu | cut -d. -f1)
+
+	case $choice in
+		"Sink")
+			rofi-pulse-select sink
+			break
+			;;
+		"Source")
+			rofi-pulse-select source
+			break
+			;;
+	esac
+}
+
+main

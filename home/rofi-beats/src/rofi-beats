@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ROFI_BEATS="$(whereis rofi-beats | cut -d " " -f 2)-menu/rofi-beats-menu.sh"
+pkill -f rofi-beats-menu.sh && bash $ROFI_BEATS || bash $ROFI_BEATS
