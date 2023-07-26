@@ -56,7 +56,7 @@ sudo nixos-rebuild switch --flake '.'
 <img alt="Qtile is a tiling window manager" src="assets/screenshots/i3.png" width="400px" align="right"/>
 
 - Linux Kernel: [6.4.3](https://www.kernel.org/)
-- Desktop Environment: [I3-WM]https://i3wm.org/
+- Desktop Environment: [I3-WM](https://i3wm.org/)
 - Terminal Emulator: [Alacritty](https://github.com/alacritty/alacritty)
 - Shell: [Fish](https://fishshell.com/) with [Oh my Fish](https://github.com/oh-my-fish/oh-my-fish)
 - Compositor: [Picom](https://github.com/yshui/picom)
