@@ -1,0 +1,8 @@
+#!/bin/bash
+
+wifiicon="󰤭 Offline"
+if [[ $(echo $(ping -c1 1.1.1.1 2> /dev/null || echo "reçus 0") | tr "," "\n" | grep "reçus" | cut -d " " -f 2 | grep 0) != "0" ]]; then
+  wifiicon="󰤨 Online"
+fi
+
+echo "${wifiicon}"
