@@ -15,11 +15,11 @@ exec --no-startup-id numlockx on
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id bash ~/.config/polybar/launch.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
-exec --no-startup-id download-win10
-exec --no-startup-id setxkbmap -layout fr -variant nodeadkeys
-exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
+#exec --no-startup-id download-win10
+exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then setxkbmap -layout fr -variant nodeadkeys; fi
+exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then setxkbmap -option 'grp:alt_shift_toggle'; fi
 exec --no-startup-id barrierc --disable-crypto 192.168.1.94
-exec --no-startup-id sleep 5; tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then audio-relay; fi
+exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then audio-relay; fi
 exec --no-startup-id mount-win10
 for_window [class="^.*"] border pixel 5
 gaps inner 10

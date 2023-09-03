@@ -5,6 +5,7 @@
     [
       ./issue
       ./polkit.nix
+      ./razer-nari
     ];
 
   nix = {
@@ -187,7 +188,6 @@
       bc
       lutris
       heroic
-      (pkgs.callPackage ./razer-nari { })
       python311
       pciutils
       wget

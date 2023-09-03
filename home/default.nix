@@ -81,7 +81,8 @@
       discord
 
       # dev
-      jetbrains-toolbox
+      jetbrains.phpstorm
+      jetbrains.pycharm-professional
       vscode
       termius
 
@@ -105,6 +106,7 @@
       gcc
       glib
       tmuxPlugins.onedark-theme
+      super-slicer-latest
 
       # utils
       peek

@@ -18,7 +18,7 @@ menu(){
 	printf "2. Lofi Girl\n"
 	printf "3. Lofi Animal Crossing\n"
 	printf "4. Lofi Zelda\n"
-	printf "5. Lofi Ghibli\n"
+	printf "5. Lofi Anime\n"
 }
 
 main() {
@@ -46,8 +46,8 @@ main() {
 			break
 			;;
 		5)
-			notification "Lofi Ghibli ☕️🎶";
-            URL="https://youtu.be/9gqDH6n3H6I"
+			notification "Lofi Anime ☕️🎶";
+            URL="https://youtu.be/OrBOBDeQnwQ"
 			break
 			;;
 	esac
