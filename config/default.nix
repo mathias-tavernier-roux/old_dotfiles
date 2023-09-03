@@ -156,6 +156,8 @@
     google-fonts
     wine64Packages.fonts
     killall
+    corefonts
+    vistafonts
   ];
 
   virtualisation = {
