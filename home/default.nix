@@ -50,7 +50,7 @@
 
     stateVersion = "23.05";
     sessionVariables = {
-      EDITOR = pkgs.nano;
+      EDITOR = "ide";
     };
 
     packages = with pkgs; [

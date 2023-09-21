@@ -167,6 +167,7 @@
 
   environment = {
     shells = with pkgs; [ fish ];
+    variables.EDITOR = "ide";
     systemPackages = with pkgs; [
       modemmanager
       networkmanagerapplet
@@ -196,7 +197,19 @@
       jdk19
       mangohud
       polkit
+      mysql-workbench
+      php82
+      php82Extensions.openssl
+      neovim
+      lazygit
+      tmux
+      (pkgs.callPackage ./ide { })
     ];
+  };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
   };
 
   programs.gamemode.enable = true;
