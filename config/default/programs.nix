@@ -77,6 +77,7 @@
       feh
       gdu
       xdotool
+      gnome.gnome-tweaks
 
       ### Dev ----------------------------------------------------- ###
       python311

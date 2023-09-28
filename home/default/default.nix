@@ -44,6 +44,7 @@
     ## ------------------------------------------------------------- ##
     packages = with pkgs; [
       ### Settings ------------------------------------------------ ###
+      /*
       arandr
       brightnessctl
       lxappearance
@@ -60,11 +61,19 @@
       screen
       btop
       xdg-user-dirs
+      */
+      gnomeExtensions.activities-workspace-name
+      gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.tophat
+      gnomeExtensions.user-themes
+      gnomeExtensions.overview-background
+      alacritty
 
       ### Volume -------------------------------------------------- ###
-      pavucontrol
+      # pavucontrol
       easyeffects
-      rofi-pulse-select
+      # rofi-pulse-select
 
       ### Messaging ----------------------------------------------- ###
       discord
@@ -74,6 +83,7 @@
       jetbrains.pycharm-professional
       vscode
       termius
+      tilix
 
       ### Games --------------------------------------------------- ###
       minecraft
@@ -84,11 +94,13 @@
       neofetch
       libreoffice
       onlyoffice-bin
+      /*
       xarchiver
       zathura
       mpv
       youtube-dl
       xfce.ristretto
+      */
       firefox
       vim
       neovim
@@ -99,7 +111,7 @@
 
       ### Utils --------------------------------------------------- ###
       peek
-      galculator
+      # galculator
       flatpak
       gnome.gnome-software
       lazygit
