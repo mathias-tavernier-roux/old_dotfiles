@@ -10,7 +10,7 @@
 
 # the MOD key(windows)
 set $mod Mod4
-exec --no-startup-id xrandr --output HDMI-A-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DisplayPort-3 --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1-0 --off --output DisplayPort-1-1 --off --output DisplayPort-1-2 --off --output HDMI-A-1-0 --mode 1920x1080 --pos 3840x0 --rotate normal
+exec --no-startup-id xrandr --output DisplayPort-1 --pos 0x0 --output DisplayPort-2 --pos 1920x0 --output HDMI-A-0 --pos 3840x0
 exec --no-startup-id numlockx on
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id bash ~/.config/polybar/launch.sh

@@ -16,6 +16,14 @@
       })
     ];
   };
+  # ------------------------------------------------------------------ #
+  xdg.portal = {
+     enable = true;
+     extraPortals = with pkgs; [
+       xdg-desktop-portal-kde
+       xdg-desktop-portal-gtk
+    ];
+  };
 ###########
 # Systemd #
 #######################################################################
@@ -54,9 +62,9 @@
         touchpad.naturalScrolling = true;
       };
       ### --------------------------------------------------------- ###
-      desktopManager.gnome.enable = true;
+      windowManager.i3.enable = true;
       ### --------------------------------------------------------- ###
-      displayManager.gdm = {
+      displayManager.lightdm = {
         enable = true;
         autoLogin.enable = true;
         autoLogin.user = username;
