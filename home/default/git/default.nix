@@ -6,12 +6,11 @@
   programs.git = {
     enable = true;
     userName = "Pikatsuto";
-    userEmail = "pikatsuto" + "@" + "gmail.com";
+    userEmail = "pikatsuto@gmail.com";
 
-    extraConfig.url = {
-      init = {
-        defaultBranch = "main";
-      };
+    extraConfig = {
+      url.init.defaultBranch = "main";
+      push.autoSetupRemote = true;
     };
 
     ignores = [

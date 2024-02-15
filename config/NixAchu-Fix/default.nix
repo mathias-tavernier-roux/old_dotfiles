@@ -2,7 +2,10 @@
 {
   boot = {
     loader = {
-      efi.canTouchEfiVariables = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
       grub = {
         enable = true;
         efiSupport = true;
@@ -52,7 +55,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-      (pkgs.callPackage ./download-win10-fix { })
+      (pkgs.callPackage ./download-win10 { })
       (pkgs.callPackage ./audiorelay { })
       barrier
     ];
