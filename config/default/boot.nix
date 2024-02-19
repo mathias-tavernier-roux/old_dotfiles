@@ -1,0 +1,20 @@
+{ config, pkgs, ... }:
+{
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev";
+        gfxmodeEfi = "1920x1080x32";
+        useOSProber = true;
+      };
+    };
+
+    extraModprobeConfig = "options kvm_intel kvm_amd nested=1";
+  };
+}

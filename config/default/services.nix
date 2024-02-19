@@ -1,29 +1,6 @@
 { hostname, username }:
 { config, pkgs, ... }:
 {
-###############
-# Environment #
-#######################################################################
-  environment.pathsToLink = [ "/share/nix-direnv" ];
-  nixpkgs = {
-    config.allowUnfree = true;
-    ## ------------------------------------------------------------- ##
-    overlays = [
-      (self: super: {
-        nix-direnv = super.nix-direnv.override {
-          enableFlakes = true;
-        };
-      })
-    ];
-  };
-  # ------------------------------------------------------------------ #
-  xdg.portal = {
-     enable = true;
-     extraPortals = with pkgs; [
-       xdg-desktop-portal-kde
-       xdg-desktop-portal-gtk
-    ];
-  };
 ###########
 # Systemd #
 #######################################################################
@@ -31,17 +8,12 @@
     gvfs.enable = true;
     tumbler.enable = true;
     openssh.enable = true;
-    flatpak.enable = true;
     gpm.enable = true;
+    mpd.enable = true;
     ## ------------------------------------------------------------- ##
     mysql = {
       enable = true;
       package = pkgs.mariadb;
-    };
-    ## ------------------------------------------------------------- ##
-    picom = {
-      enable = true;
-      fade = true;
     };
     ## ------------------------------------------------------------- ##
     pipewire = {
@@ -62,12 +34,23 @@
         touchpad.naturalScrolling = true;
       };
       ### --------------------------------------------------------- ###
-      windowManager.i3.enable = true;
-      ### --------------------------------------------------------- ###
-      displayManager.lightdm = {
+      windowManager.i3 = {
         enable = true;
-        autoLogin.enable = true;
-        autoLogin.user = username;
+        
+        package = pkgs.i3-gaps;
+        extraPackages = with pkgs; [
+          i3blocks
+        ];
+      };
+      desktopManager.xterm.enable = false;
+      ### --------------------------------------------------------- ###
+      displayManager = {
+        defaultSession = "none+i3";
+        lightdm = {
+          enable = true;
+          autoLogin.enable = true;
+          autoLogin.user = username;
+        };
       };
     };
     ## -------------------------------------------------------------- ##

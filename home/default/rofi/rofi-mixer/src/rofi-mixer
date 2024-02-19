@@ -11,10 +11,12 @@ main() {
 	case $choice in
 		"Sink")
 			rofi-pulse-select sink
+      main
 			break
 			;;
 		"Source")
 			rofi-pulse-select source
+      main
 			break
 			;;
 	esac

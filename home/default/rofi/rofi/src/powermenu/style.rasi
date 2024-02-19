@@ -1,79 +1,102 @@
-// Configuration.
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
-    font:                       "JetBrainsMono Nerd Font 10";
-    monitor: -1;
 }
 
-// Globals.
-@import "~/.config/rofi/themes/nord.rasi"
+/*****----- Global Properties -----*****/
+* {
+    font:                        "JetBrains Mono Nerd Font 10";
+    background:                  #0b0c0d;
+    background-alt:              #114E45;
+    foreground:                  #c8cfa3;
+    selected:                    #216852;
+    active:                      #c8cfa3;
+    urgent:                      #c8cfa3;
+}
 
-// Main window.
+/*
+USE_BUTTONS=YES
+*/
+
+/*****----- Main Window -----*****/
 window {
     transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       800px;
+    width:                       1000px;
     x-offset:                    0px;
     y-offset:                    0px;
-    enabled:                     true;
-    margin:                      0px;
+
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               15px;
+    border-radius:               10px;
     border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
 }
 
-// Main box.
+/*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     15px;
+    spacing:                     0px;
     margin:                      0px;
-    padding:                     30px;
-    border:                      2px solid;
-    border-radius:               15px;
-    border-color:                @border;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
     background-color:            transparent;
-    children:                    [ "listview" ];
+    children:                    [ "inputbar", "listview", "message" ];
 }
 
-// Message.
-message {
+/*****----- Inputbar -----*****/
+inputbar {
     enabled:                     true;
-    margin:                      0px;
-    padding:                     12px;
-    border:                      0px solid;
-    border-radius:               15px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
-}
-textbox {
-    enabled:                     false;
-    background-color:            inherit;
-    text-color:                  inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    placeholder-color:           @foreground;
-    blink:                       true;
-    markup:                      true;
-}
-error-message {
-    padding:                     12px;
-    border:                      0px solid;
-    border-radius:               15px;
-    border-color:                @selected;
-    background-color:            @background;
-    text-color:                  @foreground;
+    spacing:                     0px;
+    padding:                     150px 40px;
+    background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/bg.png", width);
+    children:                    [ "textbox-prompt-colon", "dummy","prompt"];
 }
 
-// List of buttons.
+dummy {
+    background-color:            transparent;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         " System";
+    padding:                     15px;
+    border:                      0px 5px 5px 0px;
+    border-radius:               15px 5px 15px 5px;
+    border-color:                @selected;
+    background-color:            @urgent;
+    text-color:                  @background;
+}
+prompt {
+    enabled:                     true;
+    padding:                     15px;
+    border:                      0px 0px 5px 5px;
+    border-radius:               5px 15px 5px 15px;
+    border-color:                @selected;
+    background-color:            @active;
+    text-color:                  @background;
+}
+
+/*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     5;
+    columns:                     6;
     lines:                       1;
     cycle:                       true;
     dynamic:                     true;
@@ -83,32 +106,23 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
     
-    spacing:                     15px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               15px;
-    border-color:                @selected;
+    spacing:                     25px;
+    margin:                      25px;
     background-color:            transparent;
-    text-color:                  @foreground;
     cursor:                      "default";
 }
 
-// Buttons.
+/*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     35px 0px;
-    border:                      0px;
-    border-radius:               15px;
-    border-color:                @selected;
+    padding:                     40px 10px;
+    border-radius:               15px 30px 15px 30px;
     background-color:            @background-alt;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
 element-text {
-    font:                        "JetBrainsMono Nerd Font 28";
+    font:                        "feather bold 32";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
@@ -116,6 +130,24 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    border:                      0px 0px 5px 5px;
+    border-color:                @urgent;
+    background-color:            var(background-alt);
+    text-color:                  var(urgent);
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     15px;
+    border-radius:               0px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }

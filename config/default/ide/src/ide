@@ -3,30 +3,27 @@
 FolderIdeCommand() {
   tmux new-session -d lazygit \
     \; split-window -h $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
-    \; resize-pane -R 75 \
+    \; resize-pane -R 63 \
     \; swap-pane -D \
     \; split-window -v -d nvim -c "NvimTreeToggle" \
-    \; resize-pane -D 15 \
+    \; resize-pane -D 17 \
     \; swap-pane -D \
     \; attach
 }
 FileIdeCommand() {
   tmux new-session -d $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
-    \; resize-pane -R 75 \
+    \; resize-pane -R 63 \
     \; swap-pane -D \
     \; split-window -v -d nvim ${1} \
-    \; resize-pane -D 15 \
+    \; resize-pane -D 17 \
     \; swap-pane -D \
     \; attach
 }
 
-ideCommand="FolderIdeCommand"
-if [ "${1}x" != "x" ]; then
-  cd ${1} 2> /dev/null
-
-  if [ -f "${1}" ]; then
-    ideCommand="FileIdeCommand ${1}"
-  fi
+ideCommand="FileIdeCommand ${1}"
+if [ -d "${1}" ] 2> /dev/null; then
+  cd ${1}
+  ideCommand="FolderIdeCommand"
 fi
 
 $ideCommand

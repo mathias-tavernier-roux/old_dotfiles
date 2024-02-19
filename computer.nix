@@ -1,4 +1,4 @@
-{ username, hostname, home-manager }:
+{ username, hostname, vfio, home-manager }:
 { config, ... }:
 {
 ###########
@@ -8,6 +8,7 @@
     (import ./config {
       inherit hostname;
       inherit username;
+      inherit vfio;
     })
     ## ------------------------------------------------------------- ##
     ./hardware/${hostname}.nix

@@ -10,7 +10,7 @@
     ./gtk
   
     ## Apps -------------------------------------------------------- ##
-    ./alacritty
+    ./kitty
     ./neofetch
     ./thunar
     ./btop
@@ -53,18 +53,20 @@
       (pkgs.callPackage ./rofi/rofi-wifi-menu { })
       (pkgs.callPackage ./rofi/rofi-mixer { })
       polybarFull
-      alacritty
       numlockx
       libnotify
       dunst
       screen
       btop
       xdg-user-dirs
-      alacritty
+      pywal
+      acpi
+      maim
+      xclip
+      picom-jonaburg
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
-      # easyeffects
       rofi-pulse-select
 
       ### Messaging ----------------------------------------------- ###
@@ -74,8 +76,7 @@
       jetbrains.phpstorm
       jetbrains.pycharm-professional
       vscode
-      termius
-      tilix
+      kitty
 
       ### Games --------------------------------------------------- ###
       minecraft
@@ -89,6 +90,7 @@
       xarchiver
       zathura
       mpv
+      mpc-cli
       youtube-dl
       xfce.ristretto
       firefox
@@ -96,13 +98,15 @@
       neovim
       gcc
       glib
-      tmuxPlugins.onedark-theme
+      viewnior
 
       ### Utils --------------------------------------------------- ###
       peek
       galculator
       flatpak
       lazygit
+      mpd
+      calc
     ];
   };
 #######################################################################

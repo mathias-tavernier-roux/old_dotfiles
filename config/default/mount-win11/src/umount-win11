@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo umount /run/media/gabriel/WIN11/ 2> /dev/null
+sudo qemu-nbd --disconnect /dev/nbd0
+sudo rmmod nbd

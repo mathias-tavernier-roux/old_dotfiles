@@ -1,4 +1,4 @@
-{ hostname, username }:
+{ hostname, username, vfio }:
 { config, ... }:
 {
 ###########
@@ -6,8 +6,9 @@
 #######################################################################
   imports = [
     (import ./default {
-      hostname = hostname;
-      username = username;
+      inherit hostname;
+      inherit username;
+      inherit vfio;
     })
     ./${hostname}
   ];

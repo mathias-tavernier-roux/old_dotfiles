@@ -12,14 +12,6 @@
       enableSSHSupport = true;
     };
     ## ------------------------------------------------------------- ##
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-    ## ------------------------------------------------------------- ##
     fish.enable = true;
   };
 #########
@@ -70,17 +62,17 @@
       tmux
       pciutils
       polkit
+      nix-direnv
 
       ### System -------------------------------------------------- ###
       modemmanager
-      networkmanagerapplet
       feh
       gdu
       xdotool
-      gnome.gnome-tweaks
 
       ### Dev ----------------------------------------------------- ###
-      python311
+      python311Full
+      python311Packages.pip
       jdk19
       virt-manager
       mysql-workbench

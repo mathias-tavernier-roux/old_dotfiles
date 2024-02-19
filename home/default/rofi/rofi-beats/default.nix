@@ -12,7 +12,6 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstall
 
     install -D --target-directory=$out/bin/ ./rofi-beats
-    install -D --target-directory=$out/bin/rofi-beats-menu/ ./rofi-beats-menu.sh
 
     runHook postInstall
   '';

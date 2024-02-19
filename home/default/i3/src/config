@@ -10,26 +10,20 @@
 
 # the MOD key(windows)
 set $mod Mod4
-exec --no-startup-id xrandr --output DisplayPort-1 --pos 0x0 --output DisplayPort-2 --pos 1920x0 --output HDMI-A-0 --pos 3840x0
+exec --no-startup-id sleep 0.2 && xrandr --output DisplayPort-1 --pos 0x0 --output DisplayPort-2 --primary --pos 1920x0 --output HDMI-A-0 --pos 3840x0
 exec --no-startup-id numlockx on
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id bash ~/.config/polybar/launch.sh
+exec --no-startup-id sleep 3 && bash ~/.config/polybar/launch.sh --docky
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
-#exec --no-startup-id download-win10
-exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then setxkbmap -layout fr -variant nodeadkeys; fi
-exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then setxkbmap -option 'grp:alt_shift_toggle'; fi
-exec --no-startup-id barrierc --disable-crypto 192.168.1.94
-exec --no-startup-id tmp=$(sudo virsh list --all | grep " win10 " | awk '{ print $3}'); if [ "x$tmp" == "xrunning" ]; then audio-relay; fi
 exec --no-startup-id mount-win10
-for_window [class="^.*"] border pixel 5
-gaps inner 10
+gaps inner 4
 
 font pango:JetBrainsMono Nerd Font 8
 
 # sets the wallpaper
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/default.jpg
+exec --no-startup-id sleep 0.4 && feh --bg-fill ~/.config/i3/wallpapers/zelda.png
 # starts the compositor
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id sleep 0.5 && picom -b --experimental-backends --config ~/.config/picom/picom.conf
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -44,11 +38,15 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+bindsym $mod+m exec rofi-beats
+bindsym $mod+Shift+m exec rofi-mixer
+bindsym Print exec bash ~/.config/rofi/applets/bin/screenshot.sh
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # start the launcher
 bindsym $mod+d exec rofi -show drun
@@ -164,3 +162,6 @@ client.placeholder      #8ec07c #0c0c0c #ebdbb2  #ebdbb2   #1d2021
 client.background      #fbf1c7 
 
 bindsym $mod+r mode "resize"
+
+default_border pixel 0
+default_floating_border pixel 0

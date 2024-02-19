@@ -1,4 +1,4 @@
-{ hostname, username }:
+{ hostname, username, vfio }:
 { config, pkgs, ... }:
 {
 ###########
@@ -14,13 +14,18 @@
 
       ./issue
       ./polkit
+
+      (import ./vfio.nix {
+        inherit vfio;
+      })
+      ./boot.nix
     ];
 ##########
 # System #
 #######################################################################
   system = {
     copySystemConfiguration = false;
-    stateVersion = "23.05";
+    stateVersion = "23.11";
   };
   # ----------------------------------------------------------------- #
   nix = {
@@ -49,6 +54,8 @@
     font = "Lat2-Terminus16";
     useXkbConfig = true;
   };
+  # ----------------------------------------------------------------- #
+  nixpkgs.config.allowUnfree = true;
 ########
 # User #
 #######################################################################
@@ -62,7 +69,15 @@
 #######################################################################
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf.enable = true;
+      };
+    };
   };
 #######################################################################
 }

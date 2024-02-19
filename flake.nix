@@ -5,13 +5,13 @@
   description = "Pikatsuto dotfiles";
   # ----------------------------------------------------------------- #
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     ## ------------------------------------------------------------- ##
     hosts.url = github:StevenBlack/hosts;
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     ## ------------------------------------------------------------- ##
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -29,6 +29,37 @@
     username = "gabriel";
     system = "x86_64-linux";
     hostname = "NixAchu";
+
+    computer = {
+      hostname = "${hostname}-Computer";
+      vfio = [
+        {
+          pcie = ''01:00.0'';
+          driver = ''nouveau'';
+          code = ''10de:2184'';
+        }
+        {
+          pcie = ''01:00.1'';
+          driver = ''nouveau'';
+          code = ''10de:1aeb'';
+        }
+        {
+          pcie = ''01:00.2'';
+          driver = ''nouveau'';
+          code = ''10de:1aec'';
+        }
+        {
+          pcie = ''01:00.3'';
+          driver = ''nouveau'';
+          code = ''10de:1aed'';
+        }
+      ];
+    };
+    ## ------------------------------------------------------------- ## 
+    laptop = {
+      hostname = "${hostname}-Laptop";
+      vfio = false;
+    };
     ## ------------------------------------------------------------- ##
     default_modules = [
       hosts.nixosModule {
@@ -46,24 +77,26 @@
   in
   {
     nixosConfigurations = {
-      NixAchu-Fix = nixpkgs.lib.nixosSystem {
+      ${computer.hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         #### ----------------------------------------------------- ####
         modules = default_modules ++ [
           (import ./computer.nix {
-            hostname = "NixAchu-Fix";
+            hostname = computer.hostname;
+            vfio = computer.vfio;
             inherit username;
             inherit home-manager;
           })
         ];
       };
       ### --------------------------------------------------------- ###
-      NixAchu-Portable = nixpkgs.lib.nixosSystem {
+      ${laptop.hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         #### ----------------------------------------------------- ####
         modules = default_modules ++ [
           (import ./computer.nix {
-            hostname = "NixAchu-Portable";
+            hostname = laptop.hostname;
+            vfio = laptop.vfio;
             inherit username;
             inherit home-manager;
           })
