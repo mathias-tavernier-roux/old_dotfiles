@@ -71,8 +71,6 @@
       xdotool
 
       ### Dev ----------------------------------------------------- ###
-      python311Full
-      python311Packages.pip
       jdk19
       virt-manager
       mysql-workbench
