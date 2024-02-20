@@ -57,20 +57,23 @@ lib.mkIf (vfio != false) {
   };
 
   systemd.services.libvirtd.preStart = let
-    pcies = lib.forEach vfio (pcie:
-      {
-        pcie = pcie.pcie;
-        escapePcie = builtins.replaceStrings [":"] ["\\:"] pcie.pcie;
-      }
-    );
-    unbindList = lib.forEach pcies (pcie:
+    escapedPcies = lib.forEach vfio.pcies (pcie: {
+      pcie = pcie.pcie;
+      escapePcie = builtins.replaceStrings [":"] ["\\:"] pcie.pcie;
+    });
+    unbindList = lib.forEach escapedPcies (pcie:
       ''echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind
       ''
     );
-    bindList = lib.forEach vfio (pcie:
+    bindList = lib.forEach vfio.pcies (pcie:
       ''echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind
       ''
     );
+
+    restartDm =
+      if vfio.restartDm
+      then "systemctl restart display-manager.service"
+      else "# disable restart dm";
 
     splitedConfig = [''
       #!/bin/sh
@@ -81,23 +84,22 @@ lib.mkIf (vfio != false) {
       if [[ $OBJECT == "win11" ]]; then
         case "$OPERATION"
           in "prepare")
-    ''] ++ unbindList ++ [''
+            ''] ++ unbindList ++ [''
             
-            umount /run/media/gabriel/WIN10/ 2> /dev/null
+            umount /run/media/gabriel/WIN11/ 2> /dev/null
             qemu-nbd --disconnect /dev/nbd0
             rmmod nbd
 
-            # systemctl restart display-manager.service
+            ${restartDm}
           ;;
 
           "release")
-
-    ''] ++ bindList ++ [''
+            ''] ++ bindList ++ [''
 
             modprobe nbd max_part=8
             qemu-nbd --connect=/dev/nbd0 /windows/win10.qcow2
 
-            # systemctl restart display-manager.service
+            ${restartDm}
           ;;
         esac
 

@@ -1,4 +1,4 @@
-{ hostname, username, vfio }:
+{ computer, username }:
 { config, pkgs, ... }:
 {
 ###########
@@ -7,8 +7,8 @@
   imports =
     [
       (import ./services.nix {
-        username = username;
-        hostname = hostname;
+        inherit username;
+        hostname = computer.hostname;
       })
       ./programs.nix
 
@@ -16,7 +16,7 @@
       ./polkit
 
       (import ./vfio.nix {
-        inherit vfio;
+        vfio = computer.vfio;
       })
       ./boot.nix
     ];

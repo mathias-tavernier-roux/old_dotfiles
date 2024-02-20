@@ -32,28 +32,31 @@
 
     computer = {
       hostname = "${hostname}-Computer";
-      vfio = [
-        {
-          pcie = ''01:00.0'';
-          driver = ''nouveau'';
-          code = ''10de:2184'';
-        }
-        {
-          pcie = ''01:00.1'';
-          driver = ''nouveau'';
-          code = ''10de:1aeb'';
-        }
-        {
-          pcie = ''01:00.2'';
-          driver = ''nouveau'';
-          code = ''10de:1aec'';
-        }
-        {
-          pcie = ''01:00.3'';
-          driver = ''nouveau'';
-          code = ''10de:1aed'';
-        }
-      ];
+      vfio = {
+        restartDm = false;
+        pcies = [
+          {
+            pcie = ''01:00.0'';
+            driver = ''nouveau'';
+            code = ''10de:2184'';
+          }
+          {
+            pcie = ''01:00.1'';
+            driver = ''nouveau'';
+            code = ''10de:1aeb'';
+          }
+          {
+            pcie = ''01:00.2'';
+            driver = ''nouveau'';
+            code = ''10de:1aec'';
+          }
+          {
+            pcie = ''01:00.3'';
+            driver = ''nouveau'';
+            code = ''10de:1aed'';
+          }
+        ];
+      };
     };
     ## ------------------------------------------------------------- ## 
     laptop = {
@@ -82,8 +85,7 @@
         #### ----------------------------------------------------- ####
         modules = default_modules ++ [
           (import ./computer.nix {
-            hostname = computer.hostname;
-            vfio = computer.vfio;
+            inherit computer;
             inherit username;
             inherit home-manager;
           })
@@ -95,8 +97,7 @@
         #### ----------------------------------------------------- ####
         modules = default_modules ++ [
           (import ./computer.nix {
-            hostname = laptop.hostname;
-            vfio = laptop.vfio;
+            computer = laptop;
             inherit username;
             inherit home-manager;
           })

@@ -1,4 +1,4 @@
-{ username, hostname, vfio, home-manager }:
+{ username, computer, home-manager }:
 { config, ... }:
 {
 ###########
@@ -6,19 +6,18 @@
 #######################################################################
   imports = [
     (import ./config {
-      inherit hostname;
+      inherit computer;
       inherit username;
-      inherit vfio;
     })
     ## ------------------------------------------------------------- ##
-    ./hardware/${hostname}.nix
+    ./hardware/${computer.hostname}.nix
     ## ------------------------------------------------------------- ##
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username} = (import ./home {
         inherit username;
-        inherit hostname;
+        hostname = computer.hostname;
       });
     }
   ];
