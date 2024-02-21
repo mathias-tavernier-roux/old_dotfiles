@@ -8,8 +8,8 @@ if [[ $OBJECT == "win11" ]]; then
       {{ unbindList }}
 
       umount /run/media/gabriel/WIN11/ 2> /dev/null
-      qemu-nbd --disconnect /dev/nbd0
-      rmmod nbd
+      qemu-nbd --disconnect /dev/nbd0 2> /dev/null
+      rmmod nbd 2> /dev/null
 
       {{ restartDm }}
       ;;
@@ -21,8 +21,8 @@ if [[ $OBJECT == "win11" ]]; then
     "release")
       {{ bindList }}
 
-      modprobe nbd max_part=8
-      qemu-nbd --connect=/dev/nbd0 /windows/win11.qcow2
+      modprobe nbd max_part=8 2> /dev/null
+      qemu-nbd --connect=/dev/nbd0 /var/lib/libvirt/images/win11.qcow2 2> /dev/null
 
       {{ restartDm }}
       ;;
@@ -32,13 +32,13 @@ elif [[ $OBJECT == "win11-no-gpu" ]]; then
   case "$OPERATION"
     in "prepare")
       umount /run/media/gabriel/WIN11/ 2> /dev/null
-      qemu-nbd --disconnect /dev/nbd0
-      rmmod nbd
+      qemu-nbd --disconnect /dev/nbd0 2> /dev/null
+      rmmod nbd 2> /dev/null
       ;;
 
     "release")
       modprobe nbd max_part=8
-      qemu-nbd --connect=/dev/nbd0 /windows/win11.qcow2
+      qemu-nbd --connect=/dev/nbd0 /var/lib/libvirt/images/win11.qcow2 2> /dev/null
       ;;
   esac
 fi

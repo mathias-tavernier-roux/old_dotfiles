@@ -159,6 +159,10 @@ lib.mkIf (vfio != false) {
     mkdir -p /var/lib/libvirt/{hooks,qemu,storage}
     chmod 755 /var/lib/libvirt/{hooks,qemu,storage}
 
+    if [ ! -f /var/lib/libvirt/images/win11.qcow2 ]; then
+      qemu-img create -f qcow2 /var/lib/libvirt/images/win11.qcow2 ${(toString vfio.diskSize)}G
+    fi
+
     # Copy hook files
     ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
     ln -sf ${pathISO} /var/lib/libvirt/storage/ISO.xml

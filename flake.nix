@@ -36,6 +36,7 @@
         cores = 4;
         threads = 2;
         memory = 12;
+        diskSize = 512;
         restartDm = false;
         pcies = [
           {
