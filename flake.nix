@@ -33,27 +33,42 @@
     computer = {
       hostname = "${hostname}-Computer";
       vfio = {
+        cores = 4;
+        threads = 2;
+        memory = 12;
         restartDm = false;
         pcies = [
           {
-            pcie = ''01:00.0'';
+            pcie = {
+              bus = "01";
+              slot = "00";
+              function = "0";
+            };
             driver = ''nouveau'';
-            code = ''10de:2184'';
           }
           {
-            pcie = ''01:00.1'';
+            pcie = {
+              bus = "01";
+              slot = "00";
+              function = "1";
+            };
             driver = ''nouveau'';
-            code = ''10de:1aeb'';
           }
           {
-            pcie = ''01:00.2'';
+            pcie = {
+              bus = "01";
+              slot = "00";
+              function = "2";
+            };
             driver = ''nouveau'';
-            code = ''10de:1aec'';
           }
           {
-            pcie = ''01:00.3'';
+            pcie = {
+              bus = "01";
+              slot = "00";
+              function = "3";
+            };
             driver = ''nouveau'';
-            code = ''10de:1aed'';
           }
         ];
       };
@@ -85,9 +100,7 @@
         #### ----------------------------------------------------- ####
         modules = default_modules ++ [
           (import ./computer.nix {
-            inherit computer;
-            inherit username;
-            inherit home-manager;
+            inherit computer username home-manager;
           })
         ];
       };
@@ -98,8 +111,7 @@
         modules = default_modules ++ [
           (import ./computer.nix {
             computer = laptop;
-            inherit username;
-            inherit home-manager;
+            inherit username home-manager;
           })
           ##### ------------------------------------------------- #####
           nixos-hardware.nixosModules.asus-battery

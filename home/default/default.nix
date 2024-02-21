@@ -37,7 +37,7 @@
     username = "${username}";
     homeDirectory = "/home/${username}";
     ## ------------------------------------------------------------- ##
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     sessionVariables = {
       EDITOR = "ide";
     };
@@ -64,6 +64,7 @@
       maim
       xclip
       picom-jonaburg
+      looking-glass-client
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
@@ -99,6 +100,7 @@
       gcc
       glib
       viewnior
+      cinnamon.nemo-with-extensions
 
       ### Utils --------------------------------------------------- ###
       peek
