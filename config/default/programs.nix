@@ -80,6 +80,9 @@
       neovim
       lazygit
       (pkgs.callPackage ./ide { })
+      man-pages
+      man-pages-posix
+
 
       ### Game ---------------------------------------------------- ###
       lutris

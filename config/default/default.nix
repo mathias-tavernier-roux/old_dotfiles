@@ -29,6 +29,7 @@
     stateVersion = "23.11";
   };
   # ----------------------------------------------------------------- #
+  documentation.dev.enable = true;
   nix = {
     gc = {
       automatic = true;
