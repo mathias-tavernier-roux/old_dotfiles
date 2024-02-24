@@ -14,7 +14,7 @@ if [[ $OBJECT == "win11" ]]; then
       {{ restartDm }}
       ;;
 
-    "start")
+    "started")
       chown {{ username }}:libvirtd /dev/shm/looking-glass
       ;;
 

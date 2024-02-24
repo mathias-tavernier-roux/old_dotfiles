@@ -13,7 +13,7 @@ lib.mkIf (vfio != false) {
 
   environment = {
     systemPackages = with pkgs; [
-      (pkgs.callPackage ./mount-win11 { })
+      (pkgs.callPackage ./winutils { })
     ];
   };
 

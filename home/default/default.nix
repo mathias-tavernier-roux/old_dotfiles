@@ -14,10 +14,10 @@
     ./neofetch
     ./thunar
     ./btop
-    ./nvim
     ./tmux
     ./flameshot
     ./git
+    ./lvim
 
     ## System ------------------------------------------------------ ##
     ./fish
@@ -78,6 +78,7 @@
       jetbrains.pycharm-professional
       vscode
       kitty
+      gnumake
 
       ### Games --------------------------------------------------- ###
       minecraft
@@ -96,7 +97,6 @@
       xfce.ristretto
       firefox
       vim
-      neovim
       gcc
       glib
       viewnior
@@ -107,8 +107,10 @@
       galculator
       flatpak
       lazygit
+      git-lfs
       mpd
       calc
+      remmina
     ];
   };
 #######################################################################

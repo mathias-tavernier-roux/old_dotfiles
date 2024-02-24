@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
 ############
 # Programs #
@@ -23,6 +23,14 @@
     ## ------------------------------------------------------------- ##
     feh.enable = true;
     lazygit.enable = true;
+    neovim = {
+      extraPackages = with pkgs; [
+        clang-tools
+        llvmPackages_latest.clang
+        nil
+      ];
+      enable = true;
+    };
   };
 #######################################################################
 }

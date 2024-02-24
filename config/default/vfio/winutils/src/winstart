@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo virsh start win11
+looking-glass-client

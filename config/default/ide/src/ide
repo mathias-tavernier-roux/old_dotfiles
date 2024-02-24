@@ -1,28 +1,39 @@
 #! /usr/bin/env bash
 
+# FolderIdeCommand() {
+#   tmux new-session -d lazygit \
+#     \; split-window -h $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
+#     \; resize-pane -R 63 \
+#     \; swap-pane -D \
+#     \; split-window -v -d ~/.local/bin/lvim -c "NvimTreeToggle" \
+#     \; resize-pane -D 17 \
+#     \; swap-pane -D \
+#     \; attach
+# }
+# FileIdeCommand() {
+#   tmux new-session -d $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
+#     \; resize-pane -R 63 \
+#     \; swap-pane -D \
+#     \; split-window -v -d ~/.local/bin/lvim ${1} \
+#     \; resize-pane -D 17 \
+#     \; swap-pane -D \
+#     \; attach
+# }
+
 FolderIdeCommand() {
-  tmux new-session -d lazygit \
-    \; split-window -h $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
-    \; resize-pane -R 63 \
-    \; swap-pane -D \
-    \; split-window -v -d nvim -c "NvimTreeToggle" \
-    \; resize-pane -D 17 \
-    \; swap-pane -D \
-    \; attach
+  ~/.local/bin/lvim -c "NvimTreeToggle"
 }
+
 FileIdeCommand() {
-  tmux new-session -d $(grep "^$USER" /etc/passwd | cut -d ":" -f 7) \
-    \; resize-pane -R 63 \
-    \; swap-pane -D \
-    \; split-window -v -d nvim ${1} \
-    \; resize-pane -D 17 \
-    \; swap-pane -D \
-    \; attach
+  ~/.local/bin/lvim ${1}
 }
 
 ideCommand="FileIdeCommand ${1}"
 if [ -d "${1}" ] 2> /dev/null; then
   cd ${1}
+  ideCommand="FolderIdeCommand"
+fi
+if [ "${1}x" == "x" ] 2> /dev/null; then
   ideCommand="FolderIdeCommand"
 fi
 

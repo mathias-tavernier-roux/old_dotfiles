@@ -31,7 +31,7 @@
     hostname = "NixAchu";
 
     computer = {
-      hostname = "${hostname}-Computer";
+      hostname = "${hostname}-Fix";
       vfio = {
         cores = 4;
         threads = 2;
@@ -76,7 +76,7 @@
     };
     ## ------------------------------------------------------------- ## 
     laptop = {
-      hostname = "${hostname}-Laptop";
+      hostname = "${hostname}-Lap";
       vfio = false;
     };
     ## ------------------------------------------------------------- ##
