@@ -6,7 +6,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      #lvim = "~/.local/bin/lvim";
+      lvim = "~/.local/bin/lvim";
     };
   };
 #######################################################################
