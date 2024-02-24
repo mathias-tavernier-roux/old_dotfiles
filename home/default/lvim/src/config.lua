@@ -7,6 +7,8 @@
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.relativenumber = false
+vim.wo.colorcolumn = "80"
+vim.opt.cursorline = true
 
 -- general
 lvim.log.level = "info"
@@ -23,6 +25,8 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.builtin.terminal.open_mapping = "<c-t>"
+-- lvim.keys.normal_mode["<C-Tab>"] = ":tabnext<CR>"
+-- lvim.keys.normal_mode["<C-S-Tab>"] = ":tabprevious<CR>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"

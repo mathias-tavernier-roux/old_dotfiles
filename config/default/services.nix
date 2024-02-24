@@ -46,11 +46,8 @@
       ### --------------------------------------------------------- ###
       displayManager = {
         defaultSession = "none+i3";
-        lightdm = {
-          enable = true;
-          autoLogin.enable = true;
-          autoLogin.user = username;
-        };
+        autoLogin.enable = true;
+        autoLogin.user = username;
       };
     };
     ## -------------------------------------------------------------- ##
