@@ -17,45 +17,6 @@ lib.mkIf (vfio != false) {
     ];
   };
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 445 5357 ];
-    allowedUDPPorts = [ 59100 3702 ];
-    allowPing = true;
-  };
-  
-  services.samba = {
-    openFirewall = true;
-    enable = true;
-    securityType = "user";
-    shares = {
-      home = {
-        path = "/home/gabriel";
-        browseable = "yes";
-        writeable = "yes";
-        "acl allow execute always" = true;
-        "read only" = "no";
-        "valid users" = "gabriel";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "gabriel";
-        "force group" = "users";
-      };
-      media = {
-        path = "/run/media/gabriel";
-        browseable = "yes";
-        writeable = "yes";
-        "acl allow execute always" = true;
-        "read only" = "no";
-        "valid users" = "gabriel";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "gabriel";
-        "force group" = "users";
-      };
-    };
-  };
-
   systemd.services.libvirtd.preStart = let
     pcies = lib.forEach vfio.pcies (pcie: {
       pcie = "${pcie.pcie.bus}:${pcie.pcie.slot}.${pcie.pcie.function}";
