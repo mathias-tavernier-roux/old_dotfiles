@@ -72,6 +72,7 @@
       wpgtk
       swaylock
       pulseaudio
+      xwaylandvideobridge
 
       ### Dev ----------------------------------------------------- ###
       jdk19
