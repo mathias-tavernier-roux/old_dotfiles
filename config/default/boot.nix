@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   boot = {
+    kernel.sysctl = { "vm.swappiness" = 1;};
     loader = {
       efi = {
         canTouchEfiVariables = true;
