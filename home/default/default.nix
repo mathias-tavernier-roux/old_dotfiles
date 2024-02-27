@@ -12,7 +12,6 @@
     ## Apps -------------------------------------------------------- ##
     ./kitty
     ./neofetch
-    ./thunar
     ./btop
     ./tmux
     ./flameshot
@@ -21,10 +20,9 @@
 
     ## System ------------------------------------------------------ ##
     ./fish
-    ./i3
     ./rofi/rofi
-    ./picom
-    ./betterlockscreen
+    ./hyprland
+    ./waybar
 
     ## Other-------------------------------------------------------- ##
     ./programs.nix
@@ -44,16 +42,12 @@
     ## ------------------------------------------------------------- ##
     packages = with pkgs; [
       ### Settings ------------------------------------------------ ###
-      arandr
       brightnessctl
-      lxappearance
       rofi
       rofi-bluetooth
-      (pkgs.callPackage ./rofi/rofi-beats { })
       (pkgs.callPackage ./rofi/rofi-wifi-menu { })
       (pkgs.callPackage ./rofi/rofi-mixer { })
-      polybarFull
-      numlockx
+      waybar
       libnotify
       dunst
       screen
@@ -63,15 +57,15 @@
       acpi
       maim
       xclip
-      picom-jonaburg
       looking-glass-client
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
       rofi-pulse-select
+      (pkgs.callPackage ./rofi/rofi-beats { })
 
       ### Messaging ----------------------------------------------- ###
-      discord
+      webcord-vencord
 
       ### Dev ----------------------------------------------------- ###
       jetbrains.phpstorm
@@ -112,6 +106,7 @@
       calc
       remmina
       pywal
+      swaybg
     ];
   };
 #######################################################################

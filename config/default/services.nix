@@ -34,18 +34,8 @@
         touchpad.naturalScrolling = true;
       };
       ### --------------------------------------------------------- ###
-      windowManager.i3 = {
-        enable = true;
-        
-        package = pkgs.i3-gaps;
-        extraPackages = with pkgs; [
-          i3blocks
-        ];
-      };
-      desktopManager.xterm.enable = false;
-      ### --------------------------------------------------------- ###
       displayManager = {
-        defaultSession = "none+i3";
+        defaultSession = "hyprland";
         autoLogin.enable = true;
         autoLogin.user = username;
       };
@@ -61,7 +51,23 @@
     hybrid-sleep.enable = false;
   };
   # ------------------------------------------------------------------ #
-  programs.gamemode.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+  };
+  # ------------------------------------------------------------------ #
+  programs = {
+    gamemode.enable = true;
+    dconf.enable = true;
+    xwayland.enable = true;
+    ## -------------------------------------------------------------- ##
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+  };
 ############
 # Hardware #
 ########################################################################

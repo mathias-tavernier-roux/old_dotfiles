@@ -236,6 +236,10 @@ lvim.plugins = {
     "felipec/vim-sanegx",
     event = "BufRead",
   },
+  {
+    'Fymyte/rasi.vim',
+    ft = 'rasi',
+  }
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>

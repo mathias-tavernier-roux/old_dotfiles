@@ -70,6 +70,8 @@
       gdu
       xdotool
       wpgtk
+      swaylock
+      pulseaudio
 
       ### Dev ----------------------------------------------------- ###
       jdk19
