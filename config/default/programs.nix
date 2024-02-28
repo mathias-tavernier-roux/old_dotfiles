@@ -36,6 +36,9 @@
     wine64Packages.fonts
     corefonts
     vistafonts
+    font-awesome
+    material-icons
+    material-design-icons
   ];
 ###########
 # Package #
