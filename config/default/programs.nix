@@ -43,6 +43,9 @@
   environment = {
     shells = with pkgs; [ fish ];
     variables.EDITOR = "ide";
+    unixODBCDrivers = with pkgs; [
+      unixODBCDrivers.msodbcsql18
+    ];
     systemPackages = with pkgs; [
       ### Utils --------------------------------------------------- ###
       git
@@ -78,14 +81,11 @@
       jdk19
       virt-manager
       mysql-workbench
-      php82
-      php82Extensions.openssl
       neovim
       lazygit
       (pkgs.callPackage ./ide { })
       man-pages
       man-pages-posix
-
 
       ### Game ---------------------------------------------------- ###
       lutris
