@@ -35,12 +35,12 @@ fi
 
 # Options
 layout=`cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2`
-option_1=" Lofi Naruto"
-option_2=" Lofi Girl"
-option_3=" Lofi Animal Crossing"
-option_4=" Lofi Zelda"
-option_5=" Lofi Anime"
-option_6=" Stop"
+option_1="󰎈 Lofi Naruto"
+option_2="󰎈 Lofi Girl"
+option_3="󰎈 Lofi Animal Crossing"
+option_4="󰎈 Lofi Zelda"
+option_5="󰎈 Lofi Anime"
+option_6="󰓛 Stop"
 
 # Toggle Actions
 active=''
