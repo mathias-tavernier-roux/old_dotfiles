@@ -8,8 +8,8 @@
       "format": "{icon}",
       "on-click": "activate",
       "format-icons": {
-        "active": "󰮯",
-        "default": "󰊠",
+        "active": " 󰮯",
+        "default": " 󰊠 ",
       }
     },
     "hyprland/window": {
@@ -46,7 +46,7 @@
     "network": {
         /* "format-wifi": "󰤨", */
         "format-wifi": "{icon}",
-        "format-ethernet": " ",
+        "format-ethernet": "󰈀",
         "format-disconnected": "󰤭",
         "tooltip-format": "{essid}",
         "on-click": "rofi-wifi-menu",
@@ -74,11 +74,11 @@
       "format": "{icon} ",
       "format-warning": "{icon}",
       "format-critical": "{icon}",
-      "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
+      "format-charging": "",
       "format-plugged": "󰚥", 
 
       "format-alt": "{icon} {time}",
-      "format-full": "ﮣ", 
+      "format-full": "󱊣", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },
     "custom/weather": {
