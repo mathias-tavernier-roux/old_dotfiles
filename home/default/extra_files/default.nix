@@ -10,7 +10,7 @@
     };
     user-dirs = {
       source = ./src/user-dirs.dirs;
-      target = ".config/xinitrc";
+      target = ".config/user-dirs.dirs";
     };
     bashrc = {
       source = ./src/.bashrc;
