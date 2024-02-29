@@ -89,6 +89,7 @@
       (pkgs.callPackage ./ide { })
       man-pages
       man-pages-posix
+      wireguard-tools
 
       ### Game ---------------------------------------------------- ###
       lutris
