@@ -96,6 +96,7 @@
       glib
       viewnior
       cinnamon.nemo-with-extensions
+      nextcloud-client
 
       ### Utils --------------------------------------------------- ###
       peek
