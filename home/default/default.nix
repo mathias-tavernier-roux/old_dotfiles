@@ -58,6 +58,8 @@
       maim
       xclip
       looking-glass-client
+      networkmanagerapplet
+      blueman
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
