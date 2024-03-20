@@ -59,6 +59,7 @@
       xclip
       looking-glass-client
       networkmanagerapplet
+      wg-netmanager
       blueman
 
       ### Volume -------------------------------------------------- ###
