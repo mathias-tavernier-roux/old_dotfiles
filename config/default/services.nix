@@ -5,6 +5,7 @@
 # Systemd #
 #######################################################################
   services = {
+    languagetool.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
     openssh.enable = true;
