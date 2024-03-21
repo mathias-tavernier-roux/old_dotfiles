@@ -67,10 +67,11 @@
       pavucontrol
       rofi-pulse-select
       (pkgs.callPackage ./rofi/rofi-beats { })
+      easyeffects
 
       ### Messaging ----------------------------------------------- ###
-      webcord-vencord
-      discord
+      telegram-desktop
+      vesktop
 
       ### Dev ----------------------------------------------------- ###
       jetbrains.phpstorm
