@@ -5,8 +5,9 @@
 #######################################################################
   home.file.vencord_desktop_configs = {
     source = ./src;
-    target = ".config/VencordDesktop/VencordDesktop";
+    target = ".config/VencordDesktop/VencordDesktopTmp";
     recursive = true;
   };
 #######################################################################
 }
+
