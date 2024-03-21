@@ -80,6 +80,7 @@
       swaylock
       pulseaudio
       xwaylandvideobridge
+      coreutils
 
       ### Dev ----------------------------------------------------- ###
       jdk19

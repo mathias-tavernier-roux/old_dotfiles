@@ -18,6 +18,8 @@
     ./git
     ./lvim
     ./libreoffice
+    ./easyeffects
+    ./vencord_desktop
 
     ## System ------------------------------------------------------ ##
     ./fish

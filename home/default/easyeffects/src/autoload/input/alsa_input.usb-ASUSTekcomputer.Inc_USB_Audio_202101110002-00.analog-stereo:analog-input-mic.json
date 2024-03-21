@@ -1,0 +1,6 @@
+{
+    "device": "alsa_input.usb-ASUSTekcomputer.Inc_USB_Audio_202101110002-00.analog-stereo",
+    "device-description": "USB Audio Analog Stereo",
+    "device-profile": "analog-input-mic",
+    "preset-name": "save"
+}

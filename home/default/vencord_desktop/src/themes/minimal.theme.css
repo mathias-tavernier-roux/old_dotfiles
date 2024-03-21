@@ -1,0 +1,50 @@
+/**
+ * @name minimal
+ * @author Gibbu
+ * @version 2.3.0
+ * @description Changes Discord enough to give it a fresh feel while also making it darker. Supports both Light and Dark themes.
+ * @source https://github.com/DiscordStyles/MinimalCord
+ * @invite ZHthyCw
+ * @authorId 174868361040232448
+ * @BDEditor MinimalCord
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@100;300;400;500;700&display=swap');
+@import url('https://discordstyles.github.io/MinimalCord/dist/MinimalCord.css');
+@import url('https://discordstyles.github.io/RadialStatus/dist/RadialStatus.css');
+@import url('https://discordstyles.github.io/HorizontalServerList/dist/HorizontalServerList.css');
+@import url('https://nyri4.github.io/Discolored/main.css');
+
+:root {
+  --accent: 10,127,201;
+  --undefined: 0;
+  --dark-bg-hue: 208;
+  --dark-bg-saturation: 17%;
+  --dark-bg-lightness: 11%;
+  --undefined: 0;
+  --light-bg-hue: 208;
+  --light-bg-saturation: 17%;
+  --light-bg-lightness: 89%;
+  --font: Varela Round;
+  --message-padding: 10px;
+  --message-spacing: 10px;
+  --rs-small-spacing: 1px;
+  --rs-medium-spacing: 3px;
+  --rs-large-spacing: 2px;
+  --rs-small-width: 2.5px;
+  --rs-medium-width: 3.5px;
+  --rs-large-width: 2px;
+  --rs-avatar-shape: 50%;
+  --rs-online-color: #43b581;
+  --rs-idle-color: #faa61a;
+  --rs-dnd-color: #f04747;
+  --rs-offline-color: #636b75;
+  --rs-streaming-color: #643da7;
+  --rs-phone-visible: block;
+  --HSL-server-icon-size: 32px;
+  --HSL-server-spacing: 10px;
+}
+
+/* Any custom CSS below here */
+
+
