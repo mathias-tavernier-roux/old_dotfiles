@@ -69,6 +69,7 @@
       pciutils
       polkit
       nix-direnv
+      fishPlugins.bass
 
       ### System -------------------------------------------------- ###
       modemmanager
