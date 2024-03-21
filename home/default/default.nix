@@ -17,6 +17,7 @@
     ./flameshot
     ./git
     ./lvim
+    ./libreoffice
 
     ## System ------------------------------------------------------ ##
     ./fish
