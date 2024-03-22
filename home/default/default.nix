@@ -73,6 +73,7 @@
       ### Messaging ----------------------------------------------- ###
       telegram-desktop
       vesktop
+      (pkgs.callPackage ./vencord_desktop/vencord-copy-conf { })
 
       ### Dev ----------------------------------------------------- ###
       jetbrains.phpstorm
