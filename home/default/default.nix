@@ -14,7 +14,6 @@
     ./neofetch
     ./btop
     ./tmux
-    ./flameshot
     ./git
     ./lvim
     ./libreoffice
@@ -96,7 +95,6 @@
       mpv
       mpc-cli
       youtube-dl
-      xfce.ristretto
       firefox
       vim
       gcc
@@ -104,9 +102,15 @@
       viewnior
       cinnamon.nemo-with-extensions
       nextcloud-client
+      wf-recorder
+      wl-clipboard
+      ffmpeg
+      grim
+      slurp
+      jq
+      (pkgs.callPackage ./hyprshot { })
 
       ### Utils --------------------------------------------------- ###
-      peek
       galculator
       flatpak
       lazygit
