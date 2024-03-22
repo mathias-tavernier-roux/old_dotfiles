@@ -721,33 +721,18 @@
             "split-channels": false
         },
         "plugins_order": [
-            "speex#0",
-            "equalizer#0",
-            "rnnoise#0"
+            "rnnoise#0",
+            "equalizer#0"
         ],
         "rnnoise#0": {
             "bypass": false,
-            "enable-vad": true,
+            "enable-vad": false,
             "input-gain": 0.0,
             "model-path": "",
             "output-gain": 0.0,
             "release": 20.0,
             "vad-thres": 50.0,
             "wet": 0.0
-        },
-        "speex#0": {
-            "bypass": false,
-            "enable-agc": false,
-            "enable-denoise": true,
-            "enable-dereverb": false,
-            "input-gain": 0.0,
-            "noise-suppression": -70,
-            "output-gain": 0.0,
-            "vad": {
-                "enable": true,
-                "probability-continue": 90,
-                "probability-start": 95
-            }
         }
     }
 }
