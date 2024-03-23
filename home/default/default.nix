@@ -72,7 +72,7 @@
 
       ### Messaging ----------------------------------------------- ###
       telegram-desktop
-      vesktop
+      (pkgs.discord.override {withVencord = true;})
       (pkgs.callPackage ./vencord_desktop/vencord-copy-conf { })
 
       ### Dev ----------------------------------------------------- ###
