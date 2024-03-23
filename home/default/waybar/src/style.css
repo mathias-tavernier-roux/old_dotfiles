@@ -159,6 +159,7 @@ window#waybar.hidden {
 #backlight,
 #battery,
 #pulseaudio,
+#bluetooth,
 #network {
   background-color: rgba(19, 18, 25, 0.9);
   padding: 0em 2em;
@@ -176,12 +177,8 @@ window#waybar.hidden {
   font-size: 12px;
 }
 
-#pulseaudio {
-  color: #8B78AF;
-  padding-left: 9px;
-  font-size: 12px;
-}
-
+#bluetooth,
+#pulseaudio,
 #pulseaudio.muted {
   color: #8B78AF;
   padding-left: 9px;

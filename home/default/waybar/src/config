@@ -1,9 +1,9 @@
 {
-    "height": 40, // Waybar height (to be removed for auto height)
+  "height": 40, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather"],
     "modules-center": ["clock", "hyprland/workspaces"],
-    "modules-right": ["tray", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
+    "modules-right": ["tray", "network", "bluetooth", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
     "hyprland/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -13,15 +13,15 @@
       }
     },
     "hyprland/window": {
-        "format": "{}"
+      "format": "{}"
     },
     "tray": {
-        "spacing": 10
+      "spacing": 10
     },
     "clock": {
-        "format": "{:%H:%M}",
-        "format-alt": "{:%d %b %Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format": "{:%H:%M}",
+      "format-alt": "{:%d %b %Y}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     },
 
     "cpu": {
@@ -31,44 +31,49 @@
       "on-click": "",
     },
     "memory": {
-        "interval": 30,
-        "format": "󰞯 {}%",
-        "format-alt":"󰞯 {used:0.1f}GB",
-        "max-length": 10,
+      "interval": 30,
+      "format": "󰞯 {}%",
+      "format-alt":"󰞯 {used:0.1f}GB",
+      "max-length": 10,
     },
     "backlight": {
-        "device": "eDP-1",
-        "format": "{icon}",
-        "tooltip-format": "{percent}",
-        "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
+      "device": "eDP-1",
+      "format": "{icon}",
+      "tooltip-format": "{percent}",
+      "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
 
     },
     "network": {
-        /* "format-wifi": "󰤨", */
-        "format-wifi": "{icon}",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰤭",
-        "tooltip-format": "{essid}",
-        "on-click": "rofi-wifi-menu",
-        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+      /* "format-wifi": "󰤨", */
+      "format-wifi": "{icon}",
+      "format-ethernet": "󰈀",
+      "format-disconnected": "󰤭",
+      "tooltip-format": "{essid}",
+      "on-click": "rofi-wifi-menu",
+      "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
     },
-
+    "bluetooth": {
+      "format-alt": "",
+      "format-on": "",
+      "format-off": "!",
+      "on-click": "rofi-bluetooth",
+      "tooltip-format": "{status}"
+    },
     "pulseaudio": {
-        "format": "{icon}",
-        "format-muted": "󰖁 ",
-        "format-icons": {
-            "default": [" ", " ", "󰕾 "]
-        },
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+      "format": "{icon}",
+      "format-muted": "󰖁 ",
+      "format-icons": {
+        "default": [" ", " ", "󰕾 "]
+      },
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
-
     "battery": {
       "bat": "BAT0",
       "adapter": "ADP0",
       "interval": 60,
       "states": {
-          "warning": 30,
-          "critical": 15
+        "warning": 30,
+        "critical": 15
       },
       "max-length": 20,
       "format": "{icon} ",
@@ -86,25 +91,25 @@
       "restart-interval": 300,
       "return-type": "json",
     },   
-   "custom/lock": {
-       "tooltip" : false,
-       "on-click": "swaylock",
-       "format" : "",
+    "custom/lock": {
+      "tooltip" : false,
+      "on-click": "swaylock",
+      "format" : "",
     },
-   "custom/spotify": {
-        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
-        "format": " {}",
-        "return-type": "json",
-        "on-click": "playerctl play-pause",
-        "on-double-click-right": "playerctl next",
-        "on-scroll-down": "playerctl previous",
+    "custom/spotify": {
+      "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+      "format": " {}",
+      "return-type": "json",
+      "on-click": "playerctl play-pause",
+      "on-double-click-right": "playerctl next",
+      "on-scroll-down": "playerctl previous",
     },
     "custom/power-menu": {
-        "format": " ⏻ ",
-        "on-click": "~/.config/rofi/powermenu/run.sh &",
+      "format": " ⏻ ",
+      "on-click": "~/.config/rofi/powermenu/run.sh &",
     }, 
     "custom/launcher": {
-        "format": "󱄅",
-        "on-click": "rofi -show drun &",
+      "format": "󱄅",
+      "on-click": "rofi -show drun &",
     },
 }
