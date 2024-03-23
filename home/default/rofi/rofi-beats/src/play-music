@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ "${2}x" != "x" && "${2}x" != "x" ]]; then
+  while true; do
+    mpv ${1} --title="radio-mpv" ${2} --no-video
+  done
+fi

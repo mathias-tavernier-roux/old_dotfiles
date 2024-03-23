@@ -10,9 +10,8 @@ stdenv.mkDerivation (finalAttrs: {
   # ----------------------------------------------------------------- #
   installPhase = ''
     runHook preInstall
-
     install -D --target-directory=$out/bin/ ./rofi-beats
-
+    install -D --target-directory=$out/bin/ ./play-music
     runHook postInstall
   '';
   # ----------------------------------------------------------------- #

@@ -9,11 +9,7 @@
 source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
-ARGS="--volume=25"
-
-notification(){
-	notify-send "Playing now: " "$@" --icon=media-tape
-}
+VOLUME=35
 
 # Theme Elements
 status="`mpc status`"
@@ -71,11 +67,6 @@ run_rofi() {
 	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
 }
 
-play_music() {
-  notification ${chosen}
-	mpv $ARGS --title="radio-mpv" $URL --no-video
-}
-
 # Execute Command
 run_cmd() {
 	if [[ "$1" == '--opt1' ]]; then
@@ -91,7 +82,8 @@ run_cmd() {
 	fi
 
   pkill -f radio-mpv
-  play_music
+  pkill -f play-music
+  play-music "--volume=${VOLUME}" ${URL}
 }
 
 # Actions
