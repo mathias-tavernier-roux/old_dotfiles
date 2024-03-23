@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+CONFIGS_TO_COPY=(
+  ~/.config/Vencord
+  ~/.config/libreoffice
+)
+
+for CONFIG_PATH in ${CONFIGS_TO_COPY}; do
+  rm -rf \
+    ${CONFIG_PATH}
+
+  cp -RL \
+    ${CONFIG_PATH}_tmp \
+    ${CONFIG_PATH}
+
+  chmod -R 755 \
+    ${CONFIG_PATH}
+done

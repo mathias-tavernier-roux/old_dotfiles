@@ -3,9 +3,9 @@
 #########
 # Files #
 #######################################################################
-  home.file.vencord_desktop_configs = {
+  home.file.vencord_configs = {
     source = ./src;
-    target = ".config/VencordDesktop/VencordDesktopTmp";
+    target = ".config/Vencord_tmp";
     recursive = true;
   };
 #######################################################################

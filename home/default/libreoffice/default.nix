@@ -5,7 +5,7 @@
 #######################################################################
   home.file.libreoffice_configs = {
     source = ./src;
-    target = ".config/libreoffice";
+    target = ".config/libreoffice_tmp";
     recursive = true;
   };
 #######################################################################

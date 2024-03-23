@@ -18,7 +18,7 @@
     ./lvim
     ./libreoffice
     ./easyeffects
-    ./vencord_desktop
+    ./vencord
 
     ## System ------------------------------------------------------ ##
     ./fish
@@ -73,7 +73,7 @@
       ### Messaging ----------------------------------------------- ###
       telegram-desktop
       (pkgs.discord.override {withVencord = true;})
-      (pkgs.callPackage ./vencord_desktop/vencord-copy-conf { })
+      (pkgs.callPackage ./writable_configs { })
 
       ### Dev ----------------------------------------------------- ###
       jetbrains.phpstorm
