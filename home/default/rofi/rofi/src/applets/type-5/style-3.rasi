@@ -62,7 +62,7 @@ imagebox {
     border-radius:               100%;
     border-color:                @selected;
     background-color:            transparent;
-    background-image:            url("~/.config/hypr/default.png", height);
+    background-image:            url("~/.config/background.png", height);
     children:                    [ "dummy", "inputbar", "dummy" ];
 }
 
