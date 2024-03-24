@@ -21,6 +21,10 @@ no() {
 CONFIGS_TO_COPY=(
   ~/.config/Vencord
   ~/.config/libreoffice
+  ~/.config/background.png
+  ~/.config/kitty
+  ~/.config/rofi
+  ~/.config/waybar
 )
 
 for CONFIG_PATH in ${CONFIGS_TO_COPY[@]}; do
@@ -28,14 +32,13 @@ for CONFIG_PATH in ${CONFIGS_TO_COPY[@]}; do
 done
 
 # Copy if not exist
-EDITABLE_CONFIGS_TO_COPY=(
-  ~/.config/background.png
-)
+# EDITABLE_CONFIGS_TO_COPY=(
+# )
 
-for CONFIG_PATH in ${EDITABLE_CONFIGS_TO_COPY}; do
-  [[ -f ${CONFIG_PATH} && -d ${CONFIG_PATH} ]] \
-    && copy_file ${CONFIG_PATH}
-done
+# for CONFIG_PATH in ${EDITABLE_CONFIGS_TO_COPY}; do
+#   [[ -f ${CONFIG_PATH} && -d ${CONFIG_PATH} ]] \
+#     && copy_file ${CONFIG_PATH}
+# done
 
 # Setup no package programs
 lvim_install() {
