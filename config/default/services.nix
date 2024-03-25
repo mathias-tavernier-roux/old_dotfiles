@@ -37,7 +37,12 @@
       };
       ### --------------------------------------------------------- ###
       displayManager = {
-        sddm.enable = true;
+        sddm = {
+          enable = true;
+          wayland.enable = true;
+          autoNumlock = true;
+          autoLogin.relogin = true;
+        };
         defaultSession = "hyprland";
         autoLogin.enable = true;
         autoLogin.user = username;
