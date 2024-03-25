@@ -24,7 +24,6 @@
     ## System ------------------------------------------------------ ##
     ./fish
     ./rofi/rofi
-    ./hyprland
     ./waybar
 
     ## Other-------------------------------------------------------- ##
@@ -62,6 +61,7 @@
       xclip
       looking-glass-client
       (pkgs.callPackage ./lockscreen { })
+      (pkgs.callPackage ./hyprwal { })
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
