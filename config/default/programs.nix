@@ -3,6 +3,10 @@
 ############
 # Settings #
 #######################################################################
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+  };
   programs = {
     command-not-found.enable = false;
     dconf.enable = true;

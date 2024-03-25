@@ -4,8 +4,6 @@
     10.193.48.101 worktogether.dev
   '';
   
-  zramSwap.enable = true;
-  
   boot.kernelParams = [ "i915.force_probe=00:02:0" ];
   
   nixpkgs.config.packageOverrides = pkgs: {
