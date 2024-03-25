@@ -5,6 +5,7 @@
 # Systemd #
 #######################################################################
   services = {
+    gnome.gnome-keyring.enable = true;
     languagetool.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
