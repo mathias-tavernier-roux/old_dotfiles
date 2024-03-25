@@ -37,6 +37,7 @@
       };
       ### --------------------------------------------------------- ###
       displayManager = {
+        sddm.enable = true;
         defaultSession = "hyprland";
         autoLogin.enable = true;
         autoLogin.user = username;
