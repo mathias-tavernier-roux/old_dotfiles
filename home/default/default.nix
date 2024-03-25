@@ -61,6 +61,7 @@
       maim
       xclip
       looking-glass-client
+      (pkgs.callPackage ./lockscreen { })
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
