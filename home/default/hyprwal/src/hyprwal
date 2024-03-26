@@ -4,8 +4,11 @@ pkill -f swaybg
 pkill -f waybar
 
 cpwrconf
+rm -rf ~/.cache/wal
 wal -i ~/.config/background.png
 source ~/.cache/wal/colors.sh
+
+cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf
 
 FILES=(
   ~/.config/rofi/themes/pywal.rasi
