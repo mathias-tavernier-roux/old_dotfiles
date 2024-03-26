@@ -8,8 +8,8 @@
       "format": "{icon}",
       "on-click": "activate",
       "format-icons": {
-        "active": " 󰮯",
-        "default": " 󰊠 ",
+        "active": "󰮯",
+        "default": "󰊠",
       }
     },
     "hyprland/window": {
@@ -40,7 +40,7 @@
       "device": "eDP-1",
       "format": "{icon}",
       "tooltip-format": "{percent}",
-      "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
+      "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
 
     },
     "network": {
@@ -61,9 +61,9 @@
     },
     "pulseaudio": {
       "format": "{icon}",
-      "format-muted": "󰖁 ",
+      "format-muted": "󰖁",
       "format-icons": {
-        "default": [" ", " ", "󰕾 "]
+        "default": ["", "", "󰕾"]
       },
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
@@ -76,13 +76,13 @@
         "critical": 15
       },
       "max-length": 20,
-      "format": "{icon} ",
+      "format": "{icon}",
       "format-warning": "{icon}",
       "format-critical": "{icon}",
       "format-charging": "",
       "format-plugged": "󰚥", 
 
-      "format-alt": "{icon} {time}",
+      "format-alt": "{icon}",
       "format-full": "󱊣", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },
@@ -98,14 +98,14 @@
     },
     "custom/spotify": {
       "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
-      "format": " {}",
+      "format": "",
       "return-type": "json",
       "on-click": "playerctl play-pause",
       "on-double-click-right": "playerctl next",
       "on-scroll-down": "playerctl previous",
     },
     "custom/power-menu": {
-      "format": " ⏻ ",
+      "format": "⏻",
       "on-click": "~/.config/rofi/powermenu/run.sh &",
     }, 
     "custom/launcher": {

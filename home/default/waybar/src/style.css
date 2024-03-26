@@ -4,10 +4,31 @@
   font-size: 12px;
 }
 
+#custom-power-menu,
+#custom-launcher,
+#clock {
+  color: {{ background }};
+  background-color: {{ foreground }};
+  margin-top: 5px;
+}
+
+#workspaces,
+#workspaces button,
+#tray,
+#custom-lock,
+#tray > .needs-attention,
+tooltip,
+label:focus,
+#backlight,
+#battery,
+#pulseaudio,
+#bluetooth,
+#network,
 #cpu,
 #memory,
+#custom-media,
+#mode,
 #idle_inhibitor,
-#idle_inhibitor.activated,
 #custom-spotify,
 #custom-weather,
 #custom-weather.severe,
@@ -19,9 +40,91 @@
 #custom-weather.rainyNight,
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
-#custom-weather.default,
+#custom-weather.default {
+  background-color: {{ color1 }};
+}
+
 #custom-power-menu,
+#custom-launcher,
 #clock,
+#tray,
+#workspaces,
+#cpu,
+#memory,
+#battery.charging,
+#battery.critical,
+#battery.warning,
+#battery.full,
+#battery.plugged,
+#pulseaudio.muted,
+#custom-lock,
+#backlight,
+#battery,
+#pulseaudio,
+#bluetooth,
+#network,
+#custom-weather,
+#custom-weather.severe,
+#custom-weather.sunnyDay,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight,
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.default {
+  margin: 8px 0;
+  padding-right: 12px;
+}
+
+#custom-power-menu,
+#tray,
+#workspaces,
+#cpu,
+#memory,
+#custom-launcher,
+#clock,
+#network {
+  padding-left: 12px;
+}
+
+#custom-power-menu,
+#custom-launcher,
+#clock,
+#workspaces,
+#tray,
+#custom-lock,
+#tray > .needs-attention,
+tooltip,
+label:focus,
+#cpu,
+#memory,
+#custom-media,
+#mode,
+#idle_inhibitor,
+#custom-spotify,
+#custom-weather,
+#custom-weather.severe,
+#custom-weather.sunnyDay,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight,
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.default {
+  margin-right: 5px;
+}
+
+#custom-launcher {
+  margin-left: 5px;
+}
+
+#cpu,
+#memory,
+#idle_inhibitor.activated,
 #custom-lock,
 #battery.warning,
 #battery.critical:not(.charging),
@@ -36,59 +139,13 @@
 #bluetooth,
 #pulseaudio,
 #pulseaudio.muted,
-#custom-launcher,
-#workspaces button.active,
-#workspaces button,
-#memory {
-  color: {{ color1 }};
-}
-
-#tray,
-#custom-launcher,
-#clock,
-#custom-lock,
-#tray > .needs-attention,
-tooltip,
-label:focus,
-#backlight,
-#battery,
-#pulseaudio,
-#bluetooth,
-#network,
-#cpu,
 #memory,
-#custom-media,
-#mode,
-#workspaces,
-#idle_inhibitor,
-#custom-power-menu,
-#custom-spotify,
-#custom-weather,
-#custom-weather.severe,
-#custom-weather.sunnyDay,
-#custom-weather.clearNight,
-#custom-weather.cloudyFoggyDay,
-#custom-weather.cloudyFoggyNight,
-#custom-weather.rainyDay,
-#custom-weather.rainyNight,
-#custom-weather.showyIcyDay,
-#custom-weather.snowyIcyNight,
-#custom-weather.default {
-  background-color: {{ background }};
-}
-
-@keyframes blink {
-  to {
-    background-color: {{ background }};
-    color: {{ color1 }};
-  }
-}
-
 #window,
 window#waybar,
 #custom-media,
 #mode,
 #workspaces,
+#workspaces button,
 #idle_inhibitor,
 #custom-spotify,
 #custom-weather,
@@ -102,12 +159,13 @@ window#waybar,
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
-  color: {{ foreground }};
+  color: {{ background }};
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: {{ background }};
   transition-property: background-color;
+  border-radius: 0 0 7px 7px;
   transition-duration: 0.5s;
 }
 
@@ -139,14 +197,7 @@ window#waybar.hidden {
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
-  padding: 2px 10px;
   border-radius: 23px 7px 23px 7px;
-  font-size: 12px;
-
-  margin-left: 4px;
-  margin-right: 4px;
-
-  margin-top: 4px;
 }
 
 #clock,
@@ -163,150 +214,31 @@ window#waybar.hidden {
   border-radius: 7px 23px 7px 23px;
 }
 
-#workspaces button {
-  box-shadow: inset 0 -3px transparent;
-
-  padding-right: 3px;
-  padding-left: 4px;
-
-  margin-left: 0;
-  margin-right: 0;
-  transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
-}
-
-#workspaces button.active {
-  padding-left: 1px;
-  padding-right: 12px;
-
-  margin-left: 0;
-  margin-right: 0;
-  transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
-}
-
-#custom-launcher {
-  margin-left: 4px;
-
-  padding-right: 18px;
-  padding-left: 14px;
-
-  font-size: 12px;
-
-  margin-top: 4px;
-}
-
-#backlight,
-#battery,
-#pulseaudio,
-#bluetooth,
 #network {
-  padding: 0em 2em;
-
-  font-size: 12px;
-
-  padding-left: 7.5px;
-  padding-right: 7.5px;
-
-  padding-top: 3px;
-  padding-bottom: 3px;
-
-  margin-top: 4px;
-
-  font-size: 12px;
-}
-
-#bluetooth,
-#pulseaudio,
-#pulseaudio.muted {
-  padding-left: 9px;
-  font-size: 12px;
-}
-
-#backlight {
-  padding-right: 5px;
-  padding-left: 8px;
-  font-size: 12px;
-}
-
-#network {
-  padding-left: 0.2em;
   border-radius: 7px 0px 0px 23px;
-  padding-left: 12px;
-  padding-right: 14px;
-  font-size: 12px;
-}
-
-#battery {
-  padding-right: 2px;
-  font-size: 12px;
-}
-
-#battery.critical,
-#battery.warning,
-#battery.full,
-#battery.plugged {
-  padding-left: 6px;
-  padding-right: 12px;
-  font-size: 12px;
-}
-
-#battery.charging { 
-  font-size: 12px;
-  padding-right: 13px;
-  padding-left: 4px;
-}
-
-#battery.full,
-#battery.plugged {
-  font-size: 12px;
-  padding-right: 10px;
 }
 
 #custom-lock {
-  padding: 0 15px 0 15px;
-  margin-left: 0;
-  margin-top: 4px;
   border-radius: 0px 23px 7px 0px;
 }
 
-#clock {
-  font-family: Iosevka Nerd Font;
-  font-weight: bold;
-  margin-top: 4px;
-}
-
 #custom-power-menu {
-  margin-right: 4px;
   border-radius: 20px;
-  padding: 0 6px 0 6.8px;
-  margin-top: 4px;
   border-radius: 7px 7px 7px 23px;
 }
 
+#workspaces button {
+  box-shadow: inset 0 -3px transparent;
+  transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
+}
+
 tooltip {
-  font-family: Iosevka Nerd Font;
   border-radius: 20px;
   padding: 15px;
 }
 
 tooltip label {
-  font-family: Iosevka Nerd Font;
   padding: 5px;
-}
-
-#tray {
-  margin-right: 4px;
-  margin-top: 4px;
-  font-size: 12px;
 }
 
 #tray > .passive {
