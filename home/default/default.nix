@@ -25,6 +25,7 @@
     ./fish
     ./rofi/rofi
     ./waybar
+    ./lockscreen/configs
 
     ## Other-------------------------------------------------------- ##
     ./programs.nix
@@ -60,8 +61,9 @@
       maim
       xclip
       looking-glass-client
-      (pkgs.callPackage ./lockscreen { })
+      (pkgs.callPackage ./lockscreen/package { })
       (pkgs.callPackage ./hyprwal { })
+      (pkgs.callPackage ./writable_configs { })
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
@@ -72,7 +74,7 @@
       ### Messaging ----------------------------------------------- ###
       telegram-desktop
       (pkgs.discord.override {withVencord = true;})
-      (pkgs.callPackage ./writable_configs { })
+      teams-for-linux
 
       ### Dev ----------------------------------------------------- ###
       jetbrains.phpstorm
@@ -96,6 +98,7 @@
       mpc-cli
       youtube-dl
       firefox
+      chromium
       vim
       gcc
       glib
