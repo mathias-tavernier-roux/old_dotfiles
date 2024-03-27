@@ -75,7 +75,7 @@ label:focus,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
   margin: 5px 0;
-  padding-right: 10px;
+  padding: 0 16px 0 0;
 }
 
 #custom-power-menu,
@@ -86,7 +86,7 @@ label:focus,
 #custom-launcher,
 #clock,
 #network {
-  padding-left: 10px;
+  padding-left: 14px;
 }
 
 #custom-launcher,
