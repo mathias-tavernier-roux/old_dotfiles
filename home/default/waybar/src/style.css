@@ -9,7 +9,7 @@
 #clock {
   color: {{ background }};
   background-color: {{ foreground }};
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 #workspaces,
@@ -74,8 +74,8 @@ label:focus,
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
-  margin: 8px 0;
-  padding-right: 12px;
+  margin: 5px 0;
+  padding-right: 10px;
 }
 
 #custom-power-menu,
@@ -86,7 +86,7 @@ label:focus,
 #custom-launcher,
 #clock,
 #network {
-  padding-left: 12px;
+  padding-left: 10px;
 }
 
 #custom-launcher,
@@ -114,15 +114,15 @@ label:focus,
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
-  margin-right: 5px;
+  margin-right: 3px;
 }
 
 #custom-power-menu {
-  margin-right: 8px;
+  margin-right: 5px;
 }
 
 #custom-launcher {
-  margin-left: 8px;
+  margin-left: 5px;
 }
 
 #cpu,
@@ -226,7 +226,6 @@ window#waybar.hidden {
 }
 
 #custom-power-menu {
-  border-radius: 20px;
   border-radius: 7px 7px 7px 23px;
 }
 
