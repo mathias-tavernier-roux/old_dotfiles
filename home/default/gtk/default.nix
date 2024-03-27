@@ -7,8 +7,8 @@
     enable = true;
 
     theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
+      name = "Orchis-Dark-Compact";
+      package = pkgs.orchis-theme;
     };
 
     cursorTheme = {
