@@ -89,7 +89,6 @@ label:focus,
   padding-left: 12px;
 }
 
-#custom-power-menu,
 #custom-launcher,
 #clock,
 #workspaces,
@@ -118,8 +117,12 @@ label:focus,
   margin-right: 5px;
 }
 
+#custom-power-menu {
+  margin-right: 8px;
+}
+
 #custom-launcher {
-  margin-left: 5px;
+  margin-left: 8px;
 }
 
 #cpu,
@@ -165,7 +168,7 @@ window#waybar,
 window#waybar {
   background-color: {{ background }};
   transition-property: background-color;
-  border-radius: 0 0 7px 7px;
+  border-radius: 0 0 10px 10px;
   transition-duration: 0.5s;
 }
 
