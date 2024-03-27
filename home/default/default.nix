@@ -26,6 +26,8 @@
     ./rofi/rofi
     ./waybar
     ./lockscreen/configs
+    ./hyprland/hyprland
+    ./hyprland/hyprland_color
 
     ## Other-------------------------------------------------------- ##
     ./programs.nix

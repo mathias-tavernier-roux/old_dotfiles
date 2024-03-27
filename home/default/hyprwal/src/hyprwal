@@ -10,6 +10,7 @@ source ~/.cache/wal/colors.sh
 
 cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf
 
+# Replace color with #
 FILES=(
   ~/.config/rofi/themes/pywal.rasi
   ~/.config/rofi/applets/type-5/style-3.rasi
@@ -22,7 +23,31 @@ for FILE in ${FILES[@]}; do
   sed -i "s/{{ color1 }}/${color1}/g" ${FILE}
   sed -i "s/{{ color2 }}/${color2}/g" ${FILE}
   sed -i "s/{{ color3 }}/${color3}/g" ${FILE}
+  sed -i "s/{{ color4 }}/${color4}/g" ${FILE}
 done
 
+# Replace color without #
+background=$(echo ${background} | sed "s/#//g")
+foreground=$(echo ${foreground} | sed "s/#//g")
+color1=$(echo ${color1} | sed "s/#//g")
+color2=$(echo ${color2} | sed "s/#//g")
+color3=$(echo ${color3} | sed "s/#//g")
+color4=$(echo ${color4} | sed "s/#//g")
+
+FILES=(
+  ~/.config/hypr/color.conf
+  ~/.local/bin/lockscreen
+)
+
+for FILE in ${FILES[@]}; do
+  sed -i "s/{{ background }}/${background}/g" ${FILE}
+  sed -i "s/{{ foreground }}/${foreground}/g" ${FILE}
+  sed -i "s/{{ color1 }}/${color1}/g" ${FILE}
+  sed -i "s/{{ color2 }}/${color2}/g" ${FILE}
+  sed -i "s/{{ color3 }}/${color3}/g" ${FILE}
+  sed -i "s/{{ color4 }}/${color4}/g" ${FILE}
+done
+
+hyprctl reload
 swaybg -m fill -i $HOME/.config/background.png &
 waybar &
