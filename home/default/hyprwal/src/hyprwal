@@ -6,6 +6,7 @@ pkill -f waybar
 cpwrconf
 rm -rf ~/.cache/wal
 wal -i ~/.config/background.png
+wpg -a ~/.config/background.png && wpg -A background.png && wpg -s background.png
 source ~/.cache/wal/colors.sh
 
 cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf
@@ -20,8 +21,8 @@ FILES=(
 for FILE in ${FILES[@]}; do
   sed -i "s/{{ background }}/${background}/g" ${FILE}
   sed -i "s/{{ foreground }}/${foreground}/g" ${FILE}
-  sed -i "s/{{ color1 }}/${color1}/g" ${FILE}
-  sed -i "s/{{ color2 }}/${color2}/g" ${FILE}
+  sed -i "s/{{ color1 }}/${color2}/g" ${FILE}
+  sed -i "s/{{ color2 }}/${color1}/g" ${FILE}
   sed -i "s/{{ color3 }}/${color3}/g" ${FILE}
   sed -i "s/{{ color4 }}/${color4}/g" ${FILE}
 done
@@ -42,8 +43,8 @@ FILES=(
 for FILE in ${FILES[@]}; do
   sed -i "s/{{ background }}/${background}/g" ${FILE}
   sed -i "s/{{ foreground }}/${foreground}/g" ${FILE}
-  sed -i "s/{{ color1 }}/${color1}/g" ${FILE}
-  sed -i "s/{{ color2 }}/${color2}/g" ${FILE}
+  sed -i "s/{{ color1 }}/${color2}/g" ${FILE}
+  sed -i "s/{{ color2 }}/${color1}/g" ${FILE}
   sed -i "s/{{ color3 }}/${color3}/g" ${FILE}
   sed -i "s/{{ color4 }}/${color4}/g" ${FILE}
 done

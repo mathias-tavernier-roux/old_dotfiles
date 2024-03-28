@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/gabriel/.config/wpg/wallpapers/background.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#101511",
+        "foreground": "#dcfff3",
+        "cursor": "#dcfff3"
+    },
+    "colors": {
+        "color0": "#101511",
+        "color1": "#D1AF56",
+        "color2": "#6B9139",
+        "color3": "#DEF262",
+        "color4": "#A6D65E",
+        "color5": "#94AE52",
+        "color6": "#649B61",
+        "color7": "#a6c6b7",
+        "color8": "#253127",
+        "color9": "#ffec5c",
+        "color10": "#8cc93c",
+        "color11": "#ffff69",
+        "color12": "#dbff66",
+        "color13": "#c7f259",
+        "color14": "#73d96d",
+        "color15": "#dcfff3"
+    }
+}

@@ -66,6 +66,7 @@
       (pkgs.callPackage ./lockscreen/package { })
       (pkgs.callPackage ./hyprwal { })
       (pkgs.callPackage ./writable_configs { })
+      wpgtk
 
       ### Volume -------------------------------------------------- ###
       pavucontrol
