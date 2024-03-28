@@ -4,7 +4,8 @@ pkill -f swaybg
 pkill -f waybar
 
 cpwrconf
-rm -rf ~/.cache/wal
+rm -rf ~/.cache
+rm -rf ~/.config/wpg/schemes/*
 wal -i ~/.config/background.png
 wpg -a ~/.config/background.png && wpg -A background.png && wpg -s background.png
 source ~/.cache/wal/colors.sh
