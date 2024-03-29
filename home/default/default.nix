@@ -85,6 +85,7 @@
       vscode
       kitty
       gnumake
+      python311
 
       ### Games --------------------------------------------------- ###
       minecraft
