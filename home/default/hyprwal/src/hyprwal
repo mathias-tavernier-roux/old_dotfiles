@@ -1,67 +1,71 @@
 #!/usr/bin/env bash
 
-cpwrconf
-rm -rf ~/.cache &
-rm -rf ~/.config/wpg/schemes/* &
-rm -rf ~/.background &
+main() {
+  cpwrconf
+  rm -rf ~/.cache &
+  rm -rf ~/.config/wpg/schemes/* &
+  rm -rf ~/.background &
 
-BACKGROUNDS=$(ls ~/.config/background/ | cut -d ' ' -f 1)
-NUMBERS_OF_BACKGROUNDS=0;
+  BACKGROUNDS=$(ls ~/.config/background/ | cut -d ' ' -f 1)
+  NUMBERS_OF_BACKGROUNDS=0;
 
-for j in ${BACKGROUNDS}; do
-  ((NUMBERS_OF_BACKGROUNDS++));
-done;
+  for j in ${BACKGROUNDS}; do
+    ((NUMBERS_OF_BACKGROUNDS++));
+  done;
 
-WALPAPER=$(
-  echo ${BACKGROUNDS} | cut -d ' ' -f $((1 + RANDOM % NUMBERS_OF_BACKGROUNDS))
-)
+  WALPAPER=$(
+    echo ${BACKGROUNDS} | cut -d ' ' -f $((1 + RANDOM % NUMBERS_OF_BACKGROUNDS))
+  )
 
-ln -s ~/.config/background/${WALPAPER} ~/.background
+  ln -s ~/.config/background/${WALPAPER} ~/.background
 
-wpg -a ~/.config/background/${WALPAPER}
-wpg -A ${WALPAPER}
-wpg -s ${WALPAPER}
-source ~/.cache/wal/colors.sh
+  wpg -a ~/.config/background/${WALPAPER}
+  wpg -A ${WALPAPER}
+  wpg -s ${WALPAPER}
+  source ~/.cache/wal/colors.sh
 
-# Replace color with #
-FILES=(
-  ~/.config/rofi/themes/pywal.rasi
-  ~/.config/rofi/applets/type-5/style-3.rasi
-  ~/.config/waybar/style.css
-)
+  # Replace color with #
+  FILES=(
+    ~/.config/rofi/themes/pywal.rasi
+    ~/.config/rofi/applets/type-5/style-3.rasi
+    ~/.config/waybar/style.css
+  )
 
-for FILE in ${FILES[@]}; do
-  sed -i \
-    -e "s/{{ background }}/${background}/g" \
-    -e "s/{{ foreground }}/${foreground}/g" \
-    -e "s/{{ color1 }}/${color2}/g" \
-    -e "s/{{ color2 }}/${color1}/g" \
-    -e "s/{{ color3 }}/${color3}/g" \
-    -e "s/{{ color4 }}/${color4}/g" ${FILE} &
-done
+  for FILE in ${FILES[@]}; do
+    sed -i \
+      -e "s/{{ background }}/${background}/g" \
+      -e "s/{{ foreground }}/${foreground}/g" \
+      -e "s/{{ color1 }}/${color2}/g" \
+      -e "s/{{ color2 }}/${color1}/g" \
+      -e "s/{{ color3 }}/${color3}/g" \
+      -e "s/{{ color4 }}/${color4}/g" ${FILE} &
+  done
 
-# Replace color without #
-source <(sed "s/#//g" ~/.cache/wal/colors.sh)
+  # Replace color without #
+  source <(sed "s/#//g" ~/.cache/wal/colors.sh)
 
-FILES=(
-  ~/.config/hypr/color.conf
-  ~/.local/bin/lockscreen
-)
+  FILES=(
+    ~/.config/hypr/color.conf
+    ~/.local/bin/lockscreen
+  )
 
-for FILE in ${FILES[@]}; do
-  sed -i \
-    -e "s/{{ background }}/${background}/g" \
-    -e "s/{{ foreground }}/${foreground}/g" \
-    -e "s/{{ color1 }}/${color2}/g" \
-    -e "s/{{ color2 }}/${color1}/g" \
-    -e "s/{{ color3 }}/${color3}/g" \
-    -e "s/{{ color4 }}/${color4}/g" ${FILE} &
-done
+  for FILE in ${FILES[@]}; do
+    sed -i \
+      -e "s/{{ background }}/${background}/g" \
+      -e "s/{{ foreground }}/${foreground}/g" \
+      -e "s/{{ color1 }}/${color2}/g" \
+      -e "s/{{ color2 }}/${color1}/g" \
+      -e "s/{{ color3 }}/${color3}/g" \
+      -e "s/{{ color4 }}/${color4}/g" ${FILE} &
+  done
 
-pkill -f swaybg &
-pkill -f waybar
+  pkill -f swaybg &
+  pkill -f waybar
 
-swaybg -m fill -i ~/.config/background/${WALPAPER} &
-hyprctl reload &
-waybar &
-cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf &
+  swaybg -m fill -i ~/.config/background/${WALPAPER} &
+  hyprctl reload &
+  waybar &
+  cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf &
+}
+
+main > /dev/null 2>&1
