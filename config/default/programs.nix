@@ -78,7 +78,7 @@
       xdotool
       wpgtk
       swaylock-effects
-      pulseaudio
+      ldacbt
       xwaylandvideobridge
       coreutils
 
