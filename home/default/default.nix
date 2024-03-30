@@ -129,6 +129,7 @@
       swaybg
       bottles
       imagemagick
+      wineWowPackages.waylandFull
     ];
   };
 #######################################################################
