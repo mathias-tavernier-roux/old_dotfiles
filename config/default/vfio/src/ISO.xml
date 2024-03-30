@@ -14,7 +14,7 @@ or other application using the libvirt API.
   <source>
   </source>
   <target>
-    <path>/home/{{ username }}/Documents/ISO</path>
+    <path>/home/{{ username }}/VM/ISO</path>
   </target>
 </pool>
 
