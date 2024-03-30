@@ -728,7 +728,7 @@
         "rnnoise#0": {
             "bypass": false,
             "enable-vad": false,
-            "input-gain": 10.1,
+            "input-gain": 5.0,
             "model-path": "",
             "output-gain": 0.0,
             "release": 20.0,
@@ -742,9 +742,9 @@
             "enable-dereverb": false,
             "input-gain": 0.0,
             "noise-suppression": -70,
-            "output-gain": 0.0,
+            "output-gain": 5.6,
             "vad": {
-                "enable": false,
+                "enable": true,
                 "probability-continue": 90,
                 "probability-start": 95
             }
