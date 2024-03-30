@@ -1,6 +1,7 @@
 { vfio, username }:
 { config, pkgs, lib, ... }:
-lib.mkIf (vfio != false) {
+if vfio != false
+then {
   boot = {
     initrd.kernelModules = [
       "vfio_pci"
@@ -9,10 +10,24 @@ lib.mkIf (vfio != false) {
       "vfio_virqfd"
       "amdgpu"
     ];
+
+    extraModprobeConfig = lib.concatStrings ([
+      ''
+        options kvm_intel kvm_amd modeset=1
+      ''
+      ] ++ lib.forEach vfio.pcies (pcie:
+        if pcie.blacklistDriver then
+          ''
+            options ${pcie.driver} modeset=0
+            blacklist ${pcie.driver}
+          ''
+        else
+        ""
+      ));
   };
 
   environment = {
-    systemPackages = with pkgs; [
+    systemPackages = [
       (pkgs.callPackage ./winutils { })
     ];
   };
@@ -21,18 +36,23 @@ lib.mkIf (vfio != false) {
     pcies = lib.forEach vfio.pcies (pcie: {
       pcie = "${pcie.pcie.bus}:${pcie.pcie.slot}.${pcie.pcie.function}";
       escapePcie = "${pcie.pcie.bus}\\:${pcie.pcie.slot}.${pcie.pcie.function}";
+      vmBus = pcie.pcie.vmBus;
       bus = pcie.pcie.bus;
       slot = pcie.pcie.slot;
       function = pcie.pcie.function;
       driver = pcie.driver;
+      blacklistDriver = pcie.blacklistDriver;
     });
-    unbindList = lib.concatStrings (lib.forEach pcies (pcie:
-      ''echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null
-      ''
+
+    unbindList = lib.concatStrings (lib.forEach pcies (pcie: 
+      if (! pcie.blacklistDriver) then ''
+        echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null''
+      else ""
     ));
-    bindList = lib.concatStrings (lib.forEach pcies (pcie:
-      ''echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null
-      ''
+    bindList = lib.concatStrings (lib.forEach pcies (pcie: 
+      if (! pcie.blacklistDriver) then ''
+        echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null''
+      else ""
     ));
 
     restartDm =
@@ -58,7 +78,7 @@ lib.mkIf (vfio != false) {
           <address
             type='pci'
             domain='0x0000'
-            bus='0x09'
+            bus='0x${pcie.vmBus}'
             slot='0x${pcie.slot}'
             function='0x${pcie.function}'
           />
@@ -101,11 +121,13 @@ lib.mkIf (vfio != false) {
         "{{ vfio.vcore }}"
         "{{ vfio.cores }}"
         "{{ vfio.threads }}"
+        "{{ username }}"
       ] [
         (toString vfio.memory)
         (toString (vfio.cores * vfio.threads))
         (toString vfio.cores)
         (toString vfio.threads)
+        (username)
       ] (builtins.readFile ./src/win11-no-gpu.xml)
     );
     pathISO = pkgs.writeScript "path-iso" (
@@ -129,5 +151,10 @@ lib.mkIf (vfio != false) {
     ln -sf ${pathISO} /var/lib/libvirt/storage/ISO.xml
     ln -sf ${win11Config} /var/lib/libvirt/qemu/win11.xml
     ln -sf ${win11NoGPUConfig} /var/lib/libvirt/qemu/win11-no-gpu.xml
+  '';
+}
+else {
+  boot.extraModprobeConfig = ''
+    options kvm_intel kvm_amd modeset=1
   '';
 }

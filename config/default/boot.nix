@@ -15,7 +15,5 @@
         useOSProber = true;
       };
     };
-
-    extraModprobeConfig = "options kvm_intel kvm_amd nested=1";
   };
 }

@@ -41,35 +41,43 @@
         pcies = [
           {
             pcie = {
+              vmBus = "09";
               bus = "01";
               slot = "00";
               function = "0";
             };
             driver = ''nouveau'';
+            blacklistDriver = true;
           }
           {
             pcie = {
+              vmBus = "09";
               bus = "01";
               slot = "00";
               function = "1";
             };
             driver = ''nouveau'';
+            blacklistDriver = true;
           }
           {
             pcie = {
+              vmBus = "09";
               bus = "01";
               slot = "00";
               function = "2";
             };
             driver = ''nouveau'';
+            blacklistDriver = true;
           }
           {
             pcie = {
+              vmBus = "09";
               bus = "01";
               slot = "00";
               function = "3";
             };
             driver = ''nouveau'';
+            blacklistDriver = true;
           }
         ];
       };
