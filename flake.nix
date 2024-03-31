@@ -94,6 +94,7 @@
         diskSize = 128;
         diskPath = "/home/${username}/VM/Disk";
         restartDm = false;
+        virtGl = "00:02.0";
         pcies = false;
       };
     };
