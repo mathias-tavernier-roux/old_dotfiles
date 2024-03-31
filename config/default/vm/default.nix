@@ -15,7 +15,8 @@ then {
       ''
         options kvm_intel kvm_amd modeset=1
       ''
-      ] ++ lib.forEach vm.pcies (pcie:
+      ] ++ (if vm.pcies != false
+      then lib.forEach vm.pcies (pcie:
         if pcie.blacklistDriver then
           ''
             options ${pcie.driver} modeset=0
@@ -23,7 +24,7 @@ then {
           ''
         else
         ""
-      ));
+      ) else []));
   };
 
   environment = {
@@ -92,6 +93,32 @@ then {
       '')
     ) else "";
 
+    videoVirtGl = if vm.virtGl != false
+    then ''
+      <model type="virtio" heads="1" primary="yes">
+        <acceleration accel3d="yes"/>
+      </model>
+      <address
+        type="pci"
+        domain="0x0000"
+        bus="0x00"
+        slot="0x01"
+        function="0x0"
+      />
+    '' else ''
+      <model type='none'/>
+    '';
+
+    graphicsVirtGl = if vm.virtGl != false
+    then ''
+      <gl
+        enable="yes"
+        rendernode="/dev/dri/by-path/pci-0000:${vm.virtGl}-render"
+      />
+    '' else ''
+      <gl enable="no"/>
+    '';
+
     qemuHook = pkgs.writeScript "qemu-hook" (
       builtins.replaceStrings [
         "{{ unbindList }}"
@@ -113,6 +140,8 @@ then {
         "{{ vm.threads }}"
         "{{ vm.pcies }}"
         "{{ vm.diskPath }}"
+        "{{ videoVirtGl }}"
+        "{{ graphicsVirtGl }}"
       ] [
         (toString vm.memory)
         (toString (vm.cores * vm.threads))
@@ -120,6 +149,8 @@ then {
         (toString vm.threads)
         pciesXml
         vm.diskPath
+        videoVirtGl
+        graphicsVirtGl
       ] (builtins.readFile ./src/win11.xml)
     );
     win11NoGPUConfig = pkgs.writeScript "win11-no-gpu-config" (
@@ -151,7 +182,7 @@ then {
     mkdir -p /var/lib/libvirt/{hooks,qemu,storage}
     chmod 755 /var/lib/libvirt/{hooks,qemu,storage}
 
-    if [ ! -f /var/lib/libvirt/images/win11.qcow2 ]; then
+    if [ ! -f ${vm.diskPath}/win11.qcow2 ]; then
       qemu-img create -f qcow2 ${vm.diskPath}/win11.qcow2 ${(toString vm.diskSize)}G
     fi
 
