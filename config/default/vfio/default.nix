@@ -157,4 +157,10 @@ else {
   boot.extraModprobeConfig = ''
     options kvm_intel kvm_amd modeset=1
   '';
+
+  environment = {
+    systemPackages = [
+      (pkgs.callPackage ./winutils_without_vfio { })
+    ];
+  };
 }

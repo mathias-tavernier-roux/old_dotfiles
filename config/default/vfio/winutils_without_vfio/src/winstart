@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo virsh start win11
+xfreerdp -f -u:"{{ username }}" -p:"" -rfx -v:192.168.122.254
