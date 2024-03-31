@@ -93,11 +93,9 @@ then {
       '')
     ) else "";
 
-    videoVirtGl = if vm.virtGl != false
+    videoVirtual = if vm.pcies == false
     then ''
-      <model type="virtio" heads="1" primary="yes">
-        <acceleration accel3d="yes"/>
-      </model>
+      <model type="virtio" heads="1" primary="yes"/>
       <address
         type="pci"
         domain="0x0000"
@@ -107,16 +105,6 @@ then {
       />
     '' else ''
       <model type='none'/>
-    '';
-
-    graphicsVirtGl = if vm.virtGl != false
-    then ''
-      <gl
-        enable="yes"
-        rendernode="/dev/dri/by-path/pci-0000:${vm.virtGl}-render"
-      />
-    '' else ''
-      <gl enable="no"/>
     '';
 
     qemuHook = pkgs.writeScript "qemu-hook" (
@@ -140,8 +128,7 @@ then {
         "{{ vm.threads }}"
         "{{ vm.pcies }}"
         "{{ vm.diskPath }}"
-        "{{ videoVirtGl }}"
-        "{{ graphicsVirtGl }}"
+        "{{ videoVirtual }}"
       ] [
         (toString vm.memory)
         (toString (vm.cores * vm.threads))
@@ -149,8 +136,7 @@ then {
         (toString vm.threads)
         pciesXml
         vm.diskPath
-        videoVirtGl
-        graphicsVirtGl
+        videoVirtual
       ] (builtins.readFile ./src/win11.xml)
     );
     win11NoGPUConfig = pkgs.writeScript "win11-no-gpu-config" (
