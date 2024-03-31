@@ -1,4 +1,4 @@
-{ virtGl, username, stdenv, lib, ... }:
+{ username, stdenv, lib, ... }:
 ############
 # Packages #
 #######################################################################
@@ -15,9 +15,7 @@ stdenv.mkDerivation (finalAttrs: {
     install -D --target-directory=$out/bin/ ./winumount
     install -D --target-directory=$out/bin/ ./winstart
 
-    if [ $(toString virtGl) == false ]; then
-      sed -i "s/looking-glass-client -F/xfreerdp -f -u:\"${username}\" -p:\"\" -rfx -v:192.168.122.254/g" $out/bin/winstart
-    fi
+    sed -i "s/{{ username }}/${username}/g" $out/bin/winstart
 
     runHook postInstall
   '';

@@ -1,4 +1,11 @@
 #!/bin/sh
 
 sudo virsh start win11
-looking-glass-client -F
+looking-glass-client -F 2> /dev/null | true
+xfreerdp \
+  -f \
+  -u:"{{ username }}" \
+  -p:"" \
+  -rfx \
+  -v:192.168.122.254 2> /dev/null | true
+
