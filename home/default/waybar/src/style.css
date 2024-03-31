@@ -12,6 +12,7 @@
   margin-top: 3px;
 }
 
+#custom-windows,
 #workspaces,
 #workspaces button,
 #tray,
@@ -44,6 +45,7 @@ label:focus,
   background-color: {{ color1 }};
 }
 
+#custom-windows,
 #custom-power-menu,
 #custom-launcher,
 #clock,
@@ -125,6 +127,7 @@ label:focus,
   margin-left: 5px;
 }
 
+#custom-windows,
 #cpu,
 #memory,
 #idle_inhibitor.activated,

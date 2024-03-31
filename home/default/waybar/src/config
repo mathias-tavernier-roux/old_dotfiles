@@ -3,7 +3,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather"],
     "modules-center": ["clock", "hyprland/workspaces"],
-    "modules-right": ["tray", "network", "bluetooth", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
+    "modules-right": ["tray", "network", "bluetooth", "pulseaudio",  "backlight", "battery", "custom/windows", "custom/lock", "custom/power-menu"],
     "hyprland/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -58,6 +58,11 @@
       "format-off": "!",
       "on-click": "rofi-bluetooth",
       "tooltip-format": "{status}"
+    },
+    "custom/windows": {
+      "tooltip" : false,
+      "format": "",
+      "on-click": "winstart"
     },
     "pulseaudio": {
       "format": "{icon}",

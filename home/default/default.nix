@@ -130,6 +130,7 @@
       bottles
       imagemagick
       wineWowPackages.waylandFull
+      freerdp
     ];
   };
 #######################################################################
