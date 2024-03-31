@@ -2,6 +2,7 @@
 
 sudo virsh start win11
 looking-glass-client -F 2> /dev/null | true
+sleep 3
 xfreerdp \
   -f \
   -u:"{{ username }}" \
