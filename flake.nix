@@ -39,7 +39,7 @@
         diskSize = 512;
         diskPath = "/var/lib/libvirt/images";
         restartDm = false;
-        virtGl = false;
+        videoVirtio = false;
         pcies = [
           {
             pcie = {
@@ -94,7 +94,7 @@
         diskSize = 128;
         diskPath = "/home/${username}/VM/Disk";
         restartDm = false;
-        virtGl = "00:02.0";
+        videoVirtio = true;
         pcies = false;
       };
     };

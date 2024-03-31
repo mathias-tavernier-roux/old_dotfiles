@@ -189,13 +189,17 @@ or other application using the libvirt API.
     <tpm model='tpm-crb'>
       <backend type='emulator' version='2.0'/>
     </tpm>
-    {{ graphicsVirtGl }}
+    <graphics type="spice" port="-1" autoport="no">
+      <listen type="address"/>
+      <image compression="off"/>
+      <gl enable="no"/>
+    </graphics>
     <sound model='ich9'>
       <audio id='1'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x1b' function='0x0'/>
     </sound>
     <audio id='1' type='spice'/>
-    <video>{{ videoVirtGl }}</video>
+    <video>{{ videoVirtio }}</video>
     {{ vm.pcies }}
     <redirdev bus='usb' type='spicevmc'>
       <address type='usb' bus='0' port='2'/>
