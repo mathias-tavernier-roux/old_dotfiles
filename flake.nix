@@ -32,12 +32,14 @@
 
     computer = {
       hostname = "${hostname}-Fix";
-      vfio = {
+      vm = {
         cores = 4;
         threads = 2;
         memory = 12;
         diskSize = 512;
+        diskPath = "/var/lib/libvirt/images";
         restartDm = false;
+        virtGl = false;
         pcies = [
           {
             pcie = {
@@ -85,7 +87,16 @@
     ## ------------------------------------------------------------- ## 
     laptop = {
       hostname = "${hostname}-Lap";
-      vfio = false;
+      vm = {
+        cores = 3;
+        threads = 2;
+        memory = 8;
+        diskSize = 128;
+        diskPath = "/home/${username}/VM/Disk";
+        restartDm = false;
+        virtGl = "00:02.0";
+        pcies = false;
+      };
     };
     ## ------------------------------------------------------------- ##
     default_modules = [

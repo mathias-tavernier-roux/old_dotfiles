@@ -13,13 +13,13 @@ or other application using the libvirt API.
       <libosinfo:os id="http://microsoft.com/win/11"/>
     </libosinfo:libosinfo>
   </metadata>
-  <memory unit='GiB'>{{ vfio.memory }}</memory>
-  <currentMemory unit='GiB'>{{ vfio.memory }}</currentMemory>
+  <memory unit='GiB'>{{ vm.memory }}</memory>
+  <currentMemory unit='GiB'>{{ vm.memory }}</currentMemory>
   <memoryBacking>
     <source type="memfd"/>
     <access mode="shared"/>
   </memoryBacking>
-  <vcpu placement='static'>{{ vfio.vcore }}</vcpu>
+  <vcpu placement='static'>{{ vm.vcore }}</vcpu>
   <os>
     <type arch='x86_64' machine='pc-q35-8.1'>hvm</type>
     <loader readonly='yes' type='pflash'>/run/libvirt/nix-ovmf/OVMF_CODE.fd</loader>
@@ -40,7 +40,7 @@ or other application using the libvirt API.
     <vmport state='off'/>
   </features>
   <cpu mode='host-passthrough' check='none' migratable='on'>
-    <topology sockets='1' dies='1' cores='{{ vfio.cores }}' threads='{{ vfio.threads }}'/>
+    <topology sockets='1' dies='1' cores='{{ vm.cores }}' threads='{{ vm.threads }}'/>
     <feature policy='require' name='topoext'/>
   </cpu>
   <clock offset='localtime'>
@@ -60,7 +60,7 @@ or other application using the libvirt API.
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2' cache='directsync' discard='unmap'/>
-      <source file='/var/lib/libvirt/images/win11.qcow2'/>
+      <source file='{{ vm.diskPath }}/win11.qcow2'/>
       <target dev='sda' bus='scsi'/>
       <boot order='1'/>
       <address type='drive' controller='0' bus='0' target='0' unit='0'/>
@@ -190,7 +190,7 @@ or other application using the libvirt API.
     <video>
       <model type='none'/>
     </video>
-    {{ vfio.pcies }}
+    {{ vm.pcies }}
     <redirdev bus='usb' type='spicevmc'>
       <address type='usb' bus='0' port='2'/>
     </redirdev>

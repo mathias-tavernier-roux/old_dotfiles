@@ -15,8 +15,8 @@
       ./issue
       ./polkit
 
-      (import ./vfio {
-        vfio = computer.vfio;
+      (import ./vm {
+        vm = computer.vm;
         inherit username;
       })
       ./boot.nix
