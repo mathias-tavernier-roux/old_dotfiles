@@ -2,7 +2,7 @@
 ###########
 # Imports #
 #######################################################################
-  description = "Pikatsuto dotfiles";
+  description = "Mathias-Tavernier-Roux dotfiles";
   # ----------------------------------------------------------------- #
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -26,9 +26,9 @@
     hosts,
     ...
   } @inputs: let
-    username = "gabriel";
+    username = "mathias";
     system = "x86_64-linux";
-    hostname = "NixAchu";
+    hostname = "Mathias";
 
     computer = {
       hostname = "${hostname}-Fix";
@@ -88,14 +88,35 @@
     laptop = {
       hostname = "${hostname}-Lap";
       vm = {
-        cores = 2;
+        cores = 5;
         threads = 2;
-        memory = 8;
+        memory = 20;
         diskSize = 128;
         diskPath = "/home/${username}/VM/Disk";
         restartDm = false;
-        videoVirtio = true;
-        pcies = false;
+        videoVirtio = false;
+        pcies = [
+          {
+            pcie = {
+              vmBus = "09";
+              bus = "03";
+              slot = "00";
+              function = "0";
+            };
+            driver = ''amdgpu'';
+            blacklistDriver = false;
+          }
+          {
+            pcie = {
+              vmBus = "09";
+              bus = "03";
+              slot = "00";
+              function = "1";
+            };
+            driver = ''amdgpu'';
+            blacklistDriver = false;
+          }
+        ];
       };
     };
     ## ------------------------------------------------------------- ##
@@ -104,7 +125,7 @@
         networking.stevenBlackHosts = {
           blockFakenews = true;
           blockGambling = true;
-          blockPorn = false;
+          blockPorn = true;
           blockSocial = true;
         };
       }
@@ -134,7 +155,6 @@
             inherit username home-manager;
           })
           ##### ------------------------------------------------- #####
-          nixos-hardware.nixosModules.asus-battery
           nixos-hardware.nixosModules.common-cpu-intel
           nixos-hardware.nixosModules.common-pc
           nixos-hardware.nixosModules.common-pc-ssd

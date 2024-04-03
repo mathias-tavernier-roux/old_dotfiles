@@ -140,6 +140,7 @@
   };
   # ------------------------------------------------------------------ #
   hardware.bluetooth.enable = true;
+  hardware.keyboard.qmk.enable = true;
   # ------------------------------------------------------------------ #
   networking = {
     hostName = "${hostname}";
