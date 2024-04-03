@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 {
   boot = {
+    kernelPackages = pkgs.linuxPackages_6_1;
+
     kernelParams = [
       "amd_iommu=on"
       "radeon.si_support=0"
       "amdgpu.si_support=1"
       "radeon.cik_support=0"
       "amdgpu.cik_support=1"
+      "video=eDP-2:2560x1600@165"
     ];
 
     supportedFilesystems = [ "ntfs" ];
@@ -17,6 +20,7 @@
   ];
 
   hardware.opengl = {
+	  enable = true;
     extraPackages = with pkgs; [
       rocmPackages.clr.icd
       amdvlk
