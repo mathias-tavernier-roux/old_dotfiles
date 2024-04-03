@@ -88,7 +88,7 @@
     laptop = {
       hostname = "${hostname}-Lap";
       vm = {
-        cores = 3;
+        cores = 2;
         threads = 2;
         memory = 8;
         diskSize = 128;

@@ -10,7 +10,6 @@
     gvfs.enable = true;
     tumbler.enable = true;
     openssh.enable = true;
-    gpm.enable = true;
     mpd.enable = true;
     ## ------------------------------------------------------------- ##
     mysql = {
@@ -125,10 +124,7 @@
     '';
   };
   # ------------------------------------------------------------------ #
-  zramSwap = {
-    enable = true;
-    memoryPercent = 100;
-  };
+  zramSwap.enable = true;
 ############
 # Hardware #
 ########################################################################

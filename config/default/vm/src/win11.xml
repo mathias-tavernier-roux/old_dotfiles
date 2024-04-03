@@ -217,7 +217,6 @@ or other application using the libvirt API.
     <qemu:device alias="scsi0-0-0-0">
       <qemu:frontend>
         <qemu:property name="rotation_rate" type="unsigned" value="1"/>
-        <qemu:property name="discard_granularity" type="unsigned" value="0"/>
       </qemu:frontend>
     </qemu:device>
   </qemu:override>
