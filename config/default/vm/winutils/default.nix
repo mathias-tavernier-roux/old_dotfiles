@@ -1,4 +1,4 @@
-{ username, stdenv, lib, ... }:
+{ username, diskPath, stdenv, lib, ... }:
 ############
 # Packages #
 #######################################################################
@@ -15,7 +15,11 @@ stdenv.mkDerivation (finalAttrs: {
     install -D --target-directory=$out/bin/ ./winumount
     install -D --target-directory=$out/bin/ ./winstart
 
+    DISK_PATH=$(echo "${diskPath}" | sed 's;/;\\/;g')
+
     sed -i "s/{{ username }}/${username}/g" $out/bin/winstart
+    sed -i "s/{{ username }}/${username}/g" $out/bin/winumount
+    sed -i "s/{{ diskPath }}/$DISK_PATH/g" $out/bin/winmount
 
     runHook postInstall
   '';

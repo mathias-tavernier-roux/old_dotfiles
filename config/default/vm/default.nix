@@ -12,9 +12,12 @@ then {
     ];
 
     extraModprobeConfig = lib.concatStrings ([
-      ''
-        options kvm_intel kvm_amd modeset=1
-      ''
+        ''
+          options kvm_amd modeset=1
+        ''
+        (if (vm.blacklistPcie != false) then ''
+          options vfio-pci ids=${vm.blacklistPcie}
+        '' else "")
       ] ++ (if vm.pcies != false
       then lib.forEach vm.pcies (pcie:
         if pcie.blacklistDriver then
@@ -22,9 +25,14 @@ then {
             options ${pcie.driver} modeset=0
             blacklist ${pcie.driver}
           ''
-        else
-        ""
+        else ""
       ) else []));
+
+    kernelParams = [
+      "amd_iommu=on"
+      "iommu=pt"
+      "video=efifb:off"
+    ];
   };
 
   environment = {
@@ -32,6 +40,7 @@ then {
       (pkgs.callPackage ./winutils {
         virtGl = vm.virtGl;
         inherit username;
+        diskPath = vm.diskPath;
       })
     ];
   };
@@ -47,20 +56,21 @@ then {
       function = pcie.pcie.function;
       driver = pcie.driver;
       blacklistDriver = pcie.blacklistDriver;
+      blacklistPcie = pcie.blacklistPcie;
       diskPath = vm.diskPath;
     }) else false;
 
     unbindList = if pcies != false
     then lib.concatStrings (lib.forEach pcies (pcie: 
-      if (! pcie.blacklistDriver) then ''
-        echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null''
-      else ""
+      if (! pcie.blacklistDriver && ! pcie.blacklistPcie) then ''
+        echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null
+        '' else ""
     )) else "";
     bindList = if pcies != false
     then lib.concatStrings (lib.forEach pcies (pcie: 
-      if (! pcie.blacklistDriver) then ''
-        echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null''
-      else ""
+      if (! pcie.blacklistDriver && ! pcie.blacklistPcie) then ''
+        echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null
+        '' else ""
     )) else "";
 
     restartDm =

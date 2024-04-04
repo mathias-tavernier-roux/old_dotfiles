@@ -54,6 +54,7 @@
         diskPath = "/home/${username}/VM/Disk";
         restartDm = false;
         videoVirtio = false;
+        blacklistPcie = "1002:7480,1002:ab30";
         pcies = [
           {
             pcie = {
@@ -62,8 +63,9 @@
               slot = "00";
               function = "0";
             };
-            driver = ''amdgpu'';
+            driver = "amdgpu";
             blacklistDriver = false;
+            blacklistPcie = true;
           }
           {
             pcie = {
@@ -72,8 +74,9 @@
               slot = "00";
               function = "1";
             };
-            driver = ''amdgpu'';
+            driver = "amdgpu";
             blacklistDriver = false;
+            blacklistPcie = true;
           }
         ];
       };
