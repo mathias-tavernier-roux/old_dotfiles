@@ -56,28 +56,28 @@
       ### --------------------------------------------------------- ###
       shares = {
         home = {
-          path = "/home/gabriel";
+          path = "/home/${username}";
           browseable = "yes";
           writeable = "yes";
           "acl allow execute always" = true;
           "read only" = "no";
-          "valid users" = "gabriel";
+          "valid users" = "${username}";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "gabriel";
+          "force user" = "${username}";
           "force group" = "users";
         };
         #### ----------------------------------------------------- ####
         media = {
-          path = "/run/media/gabriel";
+          path = "/run/media/${username}";
           browseable = "yes";
           writeable = "yes";
           "acl allow execute always" = true;
           "read only" = "no";
-          "valid users" = "gabriel";
+          "valid users" = "${username}";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "gabriel";
+          "force user" = "${username}";
           "force group" = "users";
         };
       };
