@@ -10,6 +10,7 @@
       "radeon.cik_support=0"
       "amdgpu.cik_support=1"
       "video=eDP-2:2560x1600@165"
+      "mem_sleep_default=deep"
     ];
 
     supportedFilesystems = [ "ntfs" ];
@@ -24,6 +25,11 @@
     extraPackages = with pkgs; [
       rocmPackages.clr.icd
       amdvlk
+      mesa_drivers
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-media-driver
     ];
     extraPackages32 = with pkgs; [
       driversi686Linux.amdvlk
