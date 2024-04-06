@@ -81,6 +81,7 @@
       ldacbt
       xwaylandvideobridge
       coreutils
+      upower
 
       ### Dev ----------------------------------------------------- ###
       jdk19

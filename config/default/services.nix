@@ -5,6 +5,7 @@
 # Systemd #
 #######################################################################
   services = {
+    upower.enable = true;
     gnome.gnome-keyring.enable = true;
     languagetool.enable = true;
     gvfs.enable = true;
