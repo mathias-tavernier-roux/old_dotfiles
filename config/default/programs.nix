@@ -50,6 +50,8 @@
       unixODBCDrivers.msodbcsql18
     ];
     systemPackages = with pkgs; [
+      ### SDDM Theme ---------------------------------------------- ###
+      sddm-chili-theme
       ### Utils --------------------------------------------------- ###
       git
       htop

@@ -76,12 +76,13 @@
       displayManager = {
         sddm = {
           enable = true;
+          theme = "chili";
           wayland.enable = true;
           autoNumlock = true;
-          autoLogin.relogin = true;
+          autoLogin.relogin = false;
         };
         defaultSession = "hyprland";
-        autoLogin.enable = true;
+        autoLogin.enable = false;
         autoLogin.user = username;
       };
     };
