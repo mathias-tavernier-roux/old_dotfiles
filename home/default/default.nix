@@ -76,7 +76,7 @@
 
       ### Messaging ----------------------------------------------- ###
       telegram-desktop
-      (pkgs.discord.override {withVencord = true;})
+      vesktop
       teams-for-linux
 
       ### Dev ----------------------------------------------------- ###

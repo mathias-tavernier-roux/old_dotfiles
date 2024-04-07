@@ -1,5 +1,5 @@
 {
-  "height": 40, // Waybar height (to be removed for auto height)
+  "height": 40our, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather"],
     "modules-center": ["clock", "hyprland/workspaces"],

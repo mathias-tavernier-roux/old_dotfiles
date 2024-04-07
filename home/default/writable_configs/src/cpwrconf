@@ -19,7 +19,7 @@ no() {
 
 # Copy writable config
 CONFIGS_TO_COPY=(
-  ~/.config/Vencord
+  ~/.config/VencordDesktop/VencordDesktop
   ~/.config/libreoffice
   ~/.config/background.png
   ~/.config/kitty
