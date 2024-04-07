@@ -13,6 +13,42 @@
     openssh.enable = true;
     mpd.enable = true;
     ## ------------------------------------------------------------- ##
+    endlessh-go = {
+      enable = true;
+      prometheus.enable = true; # Enable prometheus metrics
+      extraOptions = [
+        "-max_clients=4096" # Change max clients / trapped user
+        "-prometheus_entry ''"
+      ];
+    };
+    ## ------------------------------------------------------------- ##
+    prometheus = {
+      enable = true;
+      scrapeConfigs = [
+        {
+          job_name = "endlessh-go";
+          scrape_interval = "5s";
+          static_configs = [
+            {
+              targets = ["localhost:2112"];
+            }
+          ];
+        }
+      ];
+    };
+    ## ------------------------------------------------------------- ##
+    grafana = {
+      enable = true;
+      settings = {
+        server = {
+        # Listening Address
+        http_addr = "127.0.0.1";
+        # and Port
+        http_port = 3000;
+        };
+      };
+    };
+    ## ------------------------------------------------------------- ##
     mysql = {
       enable = true;
       package = pkgs.mariadb;
