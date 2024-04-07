@@ -13,7 +13,7 @@ then {
 
     extraModprobeConfig = lib.concatStrings ([
         ''
-          options kvm_amd modeset=1
+          options kvm_intel kvm_amd modeset=1
         ''
         (if (vm.blacklistPcie != false) then ''
           options vfio-pci ids=${vm.blacklistPcie}
@@ -29,6 +29,7 @@ then {
       ) else []));
 
     kernelParams = [
+      "intel_iommu=on"
       "amd_iommu=on"
       "iommu=pt"
       "video=efifb:off"
