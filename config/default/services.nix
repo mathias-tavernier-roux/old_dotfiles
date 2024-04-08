@@ -13,6 +13,17 @@
     openssh.enable = true;
     mpd.enable = true;
     ## ------------------------------------------------------------- ##
+    printing = {
+      enable = true;
+      drivers = [
+        ];
+    };
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
+    ## ------------------------------------------------------------- ##
     endlessh-go = {
       enable = true;
       prometheus.enable = true; # Enable prometheus metrics
@@ -157,6 +168,7 @@
     '';
   };
   # ------------------------------------------------------------------ #
+  hardware.sane.enable = true;
   hardware.bluetooth.enable = true;
   hardware.keyboard.qmk.enable = true;
   # ------------------------------------------------------------------ #

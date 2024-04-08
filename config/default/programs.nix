@@ -72,8 +72,9 @@
       polkit
       nix-direnv
       fishPlugins.bass
-
+      gnome.simple-scan
       ### System -------------------------------------------------- ###
+      system-config-printer
       modemmanager
       feh
       gdu
