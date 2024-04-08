@@ -16,6 +16,7 @@
     printing = {
       enable = true;
       drivers = [
+        pkgs.cnijfilter2 # Canon Printer Driver (Pixma Series)
         ];
     };
     avahi = {
