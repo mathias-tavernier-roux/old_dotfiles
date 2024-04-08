@@ -6,7 +6,6 @@ if [[ "${OBJECT}x" == "win11x" ]]; then
   case "${OPERATION}x"
     in "preparex")
       {{ unbindList }}
-      winumount 2> /dev/null || true
       {{ restartDm }}
     ;;
 
@@ -16,19 +15,7 @@ if [[ "${OBJECT}x" == "win11x" ]]; then
 
     "releasex")
       {{ bindList }}
-      winmount 2> /dev/null || true
       {{ restartDm }}
-    ;;
-  esac
-
-elif [[ "${OBJECT}x" == "win11-no-gpux" ]]; then
-  case "${OPERATION}x"
-    in "preparex")
-      winumount 2> /dev/null || true
-    ;;
-
-    "releasex")
-      winmount 2> /dev/null || true
     ;;
   esac
 fi

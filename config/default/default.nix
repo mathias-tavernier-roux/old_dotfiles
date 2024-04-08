@@ -16,7 +16,7 @@
       ./polkit
 
       (import ./vm {
-        vm = computer.vm;
+        vms = computer.vms;
         inherit username;
       })
       ./boot.nix

@@ -60,10 +60,10 @@ run_vm() {
   [ "${1}x" == "x" ] && return
 
   sudo virsh start ${1}
-  looking-glass-client
+  looking-glass-client -F
 
   if [ "${?}x" == "255x" ]; then
-    for i in {1..2}; do
+    for i in {1..3}; do
       rdp
     done
   fi

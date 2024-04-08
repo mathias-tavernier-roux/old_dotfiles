@@ -1,6 +1,6 @@
-{ vm, username }:
+{ vms, username }:
 { config, pkgs, lib, ... }:
-if vm != false
+if vms != false
 then {
   boot = {
     initrd.kernelModules = [
@@ -11,22 +11,31 @@ then {
       "amdgpu"
     ];
 
-    extraModprobeConfig = lib.concatStrings ([
-        ''
-          options kvm_intel kvm_amd modeset=1
-        ''
-        (if (vm.blacklistPcie != false) then ''
+        extraModprobeConfig = lib.concatStrings ([
+      ''
+        options kvm_intel kvm_amd modeset=1
+      ''
+    ] ++ (builtins.map (vm:
+
+      (if (vm.blacklistPcie != false)
+      then ''
           options vfio-pci ids=${vm.blacklistPcie}
-        '' else "")
-      ] ++ (if vm.pcies != false
+        ''
+      else "")
+
+    ) vms) ++ (builtins.map (vm:
+      lib.concatStrings (if vm.pcies != false
       then lib.forEach vm.pcies (pcie:
-        if pcie.blacklistDriver then
-          ''
+
+        if pcie.blacklistDriver
+        then ''
             options ${pcie.driver} modeset=0
             blacklist ${pcie.driver}
           ''
         else ""
-      ) else []));
+
+      ) else [])) vms)
+    );
 
     kernelParams = [
       "intel_iommu=on"
@@ -36,15 +45,9 @@ then {
     ];
   };
 
-  environment = {
-    systemPackages = [
-      (pkgs.callPackage ./winutils {
-        virtGl = vm.virtGl;
-        inherit username;
-        diskPath = vm.diskPath;
-      })
-    ];
-  };
+  environment.systemPackages = [
+    (pkgs.callPackage ./rofi-vm { })
+  ];
   
   services = {
     samba = {
@@ -82,42 +85,48 @@ then {
     };
   };
 
-  systemd.services.libvirtd.preStart = let
-    pcies = if vm.pcies != false
-    then lib.forEach vm.pcies (pcie: {
-      pcie = "${pcie.pcie.bus}:${pcie.pcie.slot}.${pcie.pcie.function}";
-      escapePcie = "${pcie.pcie.bus}\\:${pcie.pcie.slot}.${pcie.pcie.function}";
-      vmBus = pcie.pcie.vmBus;
-      bus = pcie.pcie.bus;
-      slot = pcie.pcie.slot;
-      function = pcie.pcie.function;
-      driver = pcie.driver;
-      blacklistDriver = pcie.blacklistDriver;
-      blacklistPcie = pcie.blacklistPcie;
-      diskPath = vm.diskPath;
-    }) else false;
+  systemd.services.libvirtd.preStart = lib.concatStrings (builtins.map (vm:
+    let
+      pcies = if vm.pcies != false
+      then builtins.map (pcie: {
+        pcie = "${pcie.pcie.bus}:${pcie.pcie.slot}.${pcie.pcie.function}";
+        escapePcie = "${pcie.pcie.bus}\\:${pcie.pcie.slot}.${pcie.pcie.function}";
+        vmBus = pcie.pcie.vmBus;
+        bus = pcie.pcie.bus;
+        slot = pcie.pcie.slot;
+        function = pcie.pcie.function;
+        driver = pcie.driver;
+        blacklistDriver = pcie.blacklistDriver;
+        blacklistPcie = pcie.blacklistPcie;
+      }) vm.pcies
+      else false;
 
-    unbindList = if pcies != false
-    then lib.concatStrings (lib.forEach pcies (pcie: 
-      if (! pcie.blacklistDriver && ! pcie.blacklistPcie) then ''
-        echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null
-        '' else ""
-    )) else "";
-    bindList = if pcies != false
-    then lib.concatStrings (lib.forEach pcies (pcie: 
-      if (! pcie.blacklistDriver && ! pcie.blacklistPcie) then ''
-        echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null
-        '' else ""
-    )) else "";
+      unbindList = if pcies != false
+      then lib.concatStrings (builtins.map (pcie: 
+        if (! pcie.blacklistDriver && ! pcie.blacklistPcie)
+        then ''
+          echo 0000:${pcie.pcie} > /sys/bus/pci/devices/0000\:${pcie.escapePcie}/driver/unbind 2> /dev/null
+        ''
+        else ""
+      ) pcies)
+      else "";
 
-    restartDm =
-      if vm.restartDm
+      bindList = if pcies != false
+      then lib.concatStrings (builtins.map (pcie: 
+        if (! pcie.blacklistDriver && ! pcie.blacklistPcie)
+        then ''
+          echo 0000:${pcie.pcie} > /sys/bus/pci/drivers/${pcie.driver}/bind 2> /dev/null
+        ''
+        else ""
+      ) pcies)
+      else "";
+
+      restartDmFormated = if vm.restartDm
       then "systemctl restart display-manager.service"
-      else "# disable restart dm";
+      else "";
 
-    pciesXml = if pcies != false
-    then lib.concatStrings (
-      lib.forEach pcies (pcie: ''
+      pciesXml = if pcies != false
+      then lib.concatStrings (builtins.map (pcie: ''
         <hostdev
           mode='subsystem'
           type='pci'
@@ -140,113 +149,167 @@ then {
           />
           <!-- multifunction='on' -->
         </hostdev>
-      '')
-    ) else "";
+      '') pcies)
+      else "";
 
-    videoVirtio = if vm.videoVirtio != false
-    then ''
-      <model type="virtio" heads="1" primary="yes">
-        <acceleration accel3d="no"/>
-      </model>
-      <address
-        type="pci"
-        domain="0x0000"
-        bus="0x00"
-        slot="0x01"
-        function="0x0"
-      />
-    '' else ''
-      <model type='none'/>
-    '';
+      videoVirtio = if vm.videoVirtio != false
+      then ''
+        <model type="virtio" heads="1" primary="yes">
+          <acceleration accel3d="no"/>
+        </model>
+        <address
+          type="pci"
+          domain="0x0000"
+          bus="0x00"
+          slot="0x01"
+          function="0x0"
+        />
+      ''
+      else ''
+        <model type='none'/>
+      '';
 
-    graphicsVirtio = if vm.videoVirtio != false
-    then ''
-      <graphics type='spice'>
-        <listen type="none"/>
-        <image compression="off"/>
-        <gl enable="no"/>
-      </graphics>
-    '' else ''
-      <graphics type="spice" port="-1" autoport="no">
-        <listen type="address"/>
-        <image compression="off"/>
-        <gl enable="no"/>
-      </graphics>
-    '';
+      graphicsVirtio = if vm.videoVirtio != false
+      then ''
+        <graphics type='spice'>
+          <listen type="none"/>
+          <image compression="off"/>
+          <gl enable="no"/>
+        </graphics>
+      ''
+      else ''
+        <graphics type="spice" port="-1" autoport="no">
+          <listen type="address"/>
+          <image compression="off"/>
+          <gl enable="no"/>
+        </graphics>
+      '';
 
-    qemuHook = pkgs.writeScript "qemu-hook" (
-      builtins.replaceStrings [
-        "{{ unbindList }}"
-        "{{ bindList }}"
-        "{{ restartDm }}"
-        "{{ username }}"
-      ] [
-        unbindList
-        bindList
-        restartDm
-        username
-      ] (builtins.readFile ./src/qemuHook.sh)
-    );
-    win11Config = pkgs.writeScript "win11-config" (
-      builtins.replaceStrings [
-        "{{ vm.memory }}"
-        "{{ vm.vcore }}"
-        "{{ vm.cores }}"
-        "{{ vm.threads }}"
-        "{{ vm.pcies }}"
-        "{{ vm.diskPath }}"
-        "{{ videoVirtio }}"
-        "{{ graphicsVirtio }}"
-      ] [
-        (toString vm.memory)
-        (toString (vm.cores * vm.threads))
-        (toString vm.cores)
-        (toString vm.threads)
-        pciesXml
-        vm.diskPath
-        videoVirtio
-        graphicsVirtio
-      ] (builtins.readFile ./src/win11.xml)
-    );
-    win11NoGPUConfig = pkgs.writeScript "win11-no-gpu-config" (
-      builtins.replaceStrings [
-        "{{ vm.memory }}"
-        "{{ vm.vcore }}"
-        "{{ vm.cores }}"
-        "{{ vm.threads }}"
-        "{{ username }}"
-        "{{ vm.diskPath }}"
-      ] [
-        (toString vm.memory)
-        (toString (vm.cores * vm.threads))
-        (toString vm.cores)
-        (toString vm.threads)
-        username
-        vm.diskPath
-      ] (builtins.readFile ./src/win11-no-gpu.xml)
-    );
-    pathISO = pkgs.writeScript "path-iso" (
-      builtins.replaceStrings [
-        "{{ username }}"
-      ] [
-        username
-      ] (builtins.readFile ./src/ISO.xml)
-    );
+      ssdEmulation = if vm.ssdEmulation
+      then ''
+        <qemu:override>
+          <qemu:device alias="scsi0-0-0-0">
+            <qemu:frontend>
+              <qemu:property name="rotation_rate" type="unsigned" value="1"/>
+            </qemu:frontend>
+          </qemu:device>
+        </qemu:override>
+      ''
+      else "";
 
-  in ''
-    mkdir -p /var/lib/libvirt/{hooks,qemu,storage}
-    chmod 755 /var/lib/libvirt/{hooks,qemu,storage}
+      virtioIso = if vm.os == "win11"
+      then ''
+        <disk type='file' device='cdrom'>
+          <driver name='qemu' type='raw'/>
+          <source file='/home/${username}/VM/ISO/virtio-win.iso'/>
+          <target dev='sdc' bus='sata'/>
+          <readonly/>
+          <address type='drive' controller='0' bus='0' target='0' unit='2'/>
+        </disk>
+      ''
+      else "";
 
-    if [ ! -f ${vm.diskPath}/win11.qcow2 ]; then
-      qemu-img create -f qcow2 ${vm.diskPath}/win11.qcow2 ${(toString vm.diskSize)}G
-    fi
+      osUrl = if vm.os == "linux"
+      then "http://libosinfo.org/linux/2022"
+      else "http://microsoft.com/win/11";
 
-    # Copy hook files
-    ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
-    ln -sf ${pathISO} /var/lib/libvirt/storage/ISO.xml
-    ln -sf ${win11Config} /var/lib/libvirt/qemu/win11.xml
-    ln -sf ${win11NoGPUConfig} /var/lib/libvirt/qemu/win11-no-gpu.xml
-  '';
+      qemuHook = pkgs.writeScript "qemu-hook" (
+        builtins.replaceStrings [
+          "{{ unbindList }}"
+          "{{ bindList }}"
+          "{{ restartDm }}"
+          "{{ username }}"
+        ] [
+          unbindList
+          bindList
+          restartDmFormated
+          username
+        ] (builtins.readFile ./src/qemuHook.sh)
+      );
+
+      templateConfig = pkgs.writeScript "template-config" (
+        builtins.replaceStrings [
+          "{{ vm.memory }}"
+          "{{ vm.vcore }}"
+          "{{ vm.cores }}"
+          "{{ vm.threads }}"
+          "{{ vm.pcies }}"
+          "{{ vm.diskPath }}"
+          "{{ videoVirtio }}"
+          "{{ graphicsVirtio }}"
+          "{{ vm.name }}"
+          "{{ ssdEmulation }}"
+          "{{ osUrl }}"
+        ] [
+          (toString vm.memory)
+          (toString (vm.cores * vm.threads))
+          (toString vm.cores)
+          (toString vm.threads)
+          pciesXml
+          vm.diskPath
+          videoVirtio
+          graphicsVirtio
+          vm.name
+          ssdEmulation
+          osUrl
+        ] (builtins.readFile ./src/template.xml)
+      );
+
+      templateSetupConfig = pkgs.writeScript "template-setup-config" (
+        builtins.replaceStrings [
+          "{{ vm.memory }}"
+          "{{ vm.vcore }}"
+          "{{ vm.cores }}"
+          "{{ vm.threads }}"
+          "{{ username }}"
+          "{{ vm.diskPath }}"
+          "{{ vm.name }}"
+          "{{ ssdEmulation }}"
+          "{{ virtioIso }}"
+          "{{ osUrl }}"
+          "{{ vm.isoName }}"
+        ] [
+          (toString vm.memory)
+          (toString (vm.cores * vm.threads))
+          (toString vm.cores)
+          (toString vm.threads)
+          username
+          vm.diskPath
+          vm.name
+          ssdEmulation
+          virtioIso
+          osUrl
+          vm.isoName
+        ] (builtins.readFile ./src/template-setup.xml)
+      );
+
+      pathISO = pkgs.writeScript "path-iso" (
+        builtins.replaceStrings [
+          "{{ username }}"
+        ] [
+          username
+        ] (builtins.readFile ./src/ISO.xml)
+      );
+    in
+      ''
+        mkdir -p /var/lib/libvirt/{hooks,qemu,storage}
+        chmod 755 /var/lib/libvirt/{hooks,qemu,storage}
+
+        if [ ! -f ${vm.diskPath}/${vm.name}.qcow2 ]; then
+          # qemu-img create \
+          #  -f qcow2 ${vm.diskPath}/${vm.name}.qcow2 \
+          #  ${(toString vm.diskSize)}G
+
+          echo "test"
+        fi
+
+        # Copy hook files
+        ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu.d/${vm.name}
+        ln -sf ${pathISO} /var/lib/libvirt/storage/ISO.xml
+        ln -sf ${templateConfig} /var/lib/libvirt/qemu/${vm.name}.xml
+        ln -sf ${templateSetupConfig} /var/lib/libvirt/qemu/${vm.name}-setup.xml
+      ''
+  ) vms);
 }
 else {
   boot.extraModprobeConfig = ''

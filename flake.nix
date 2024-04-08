@@ -35,8 +35,12 @@
     computers = applyAttrNames {
       "${hostname}-Lap" = self: {
         hostname = "${hostname}-Lap";
-        vm = [
+        vms = [
           {
+            name = "win11";
+            os = "win11";
+            ssdEmulation = true;
+            isoName = "win11.iso";
             cores = 5;
             threads = 2;
             memory = 20;

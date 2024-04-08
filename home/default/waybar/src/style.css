@@ -12,7 +12,7 @@
   margin-top: 3px;
 }
 
-#custom-windows,
+#custom-vm,
 #workspaces,
 #workspaces button,
 #tray,
@@ -45,7 +45,7 @@ label:focus,
   background-color: {{ color1 }};
 }
 
-#custom-windows,
+#custom-vm,
 #custom-power-menu,
 #custom-launcher,
 #clock,
@@ -127,7 +127,7 @@ label:focus,
   margin-left: 5px;
 }
 
-#custom-windows,
+#custom-vm,
 #cpu,
 #memory,
 #idle_inhibitor.activated,
