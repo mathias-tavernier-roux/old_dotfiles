@@ -61,7 +61,7 @@
     },
     "custom/vm": {
       "tooltip" : false,
-      "format": "",
+      "format": "",
       "on-click": "rofi-vm"
     },
     "pulseaudio": {
