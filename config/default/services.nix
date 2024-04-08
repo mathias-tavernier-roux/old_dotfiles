@@ -87,39 +87,6 @@
       };
     };
     ## ------------------------------------------------------------- ##
-    samba = {
-      openFirewall = true;
-      enable = true;
-      securityType = "user";
-      ### --------------------------------------------------------- ###
-      shares = {
-        home = {
-          path = "/home/${username}";
-          browseable = "yes";
-          writeable = "yes";
-          "acl allow execute always" = true;
-          "read only" = "no";
-          "valid users" = "${username}";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "${username}";
-          "force group" = "users";
-        };
-        #### ----------------------------------------------------- ####
-        media = {
-          path = "/run/media/${username}";
-          browseable = "yes";
-          writeable = "yes";
-          "acl allow execute always" = true;
-          "read only" = "no";
-          "valid users" = "${username}";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "${username}";
-          "force group" = "users";
-        };
-      };
-    };
     fprintd.enable = true;
     ## -------------------------------------------------------------- ##
     power-profiles-daemon.enable = false;
