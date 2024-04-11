@@ -1,7 +1,7 @@
 {
   "height": 40, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
-    "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather"],
+    "modules-left": ["custom/launcher", "cpu", "memory", "custom/weather", "keyboard-state"],
     "modules-center": ["clock", "hyprland/workspaces"],
     "modules-right": ["tray", "network", "bluetooth", "pulseaudio",  "backlight", "battery", "custom/vm", "custom/lock", "custom/power-menu"],
     "hyprland/workspaces": {
@@ -117,4 +117,13 @@
       "format": "󱄅",
       "on-click": "rofi -show drun &",
     },
+    "keyboard-state": {
+      "numlock": true,
+      "capslock": true,
+      "format": " {name}: {icon} ",
+      "format-icons": {
+        "locked": "",
+        "unlocked": ""
+      }
+    }
 }
