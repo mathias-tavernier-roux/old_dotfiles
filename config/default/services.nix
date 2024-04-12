@@ -175,7 +175,15 @@
   # ------------------------------------------------------------------ #
   networking = {
     hostName = "${hostname}";
-    networkmanager.enable = true;
+    interfaces.eth0.useDHCP = true;
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
+    };
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
   };
   # ------------------------------------------------------------------ #
   sound.enable = true;

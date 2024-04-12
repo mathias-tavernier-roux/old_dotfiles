@@ -2,6 +2,11 @@
 {
   boot = {
     kernel.sysctl = { "vm.swappiness" = 1;};
+
+    kernelParams = [
+      "net.ifnames=0"
+    ];
+
     loader = {
       efi = {
         canTouchEfiVariables = true;

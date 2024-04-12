@@ -49,7 +49,7 @@
       "format-ethernet": "󰈀",
       "format-disconnected": "󰤭",
       "tooltip-format": "{essid}",
-      "on-click": "rofi-wifi-menu",
+      "on-click": "rofi-wpa",
       "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
     },
     "bluetooth": {

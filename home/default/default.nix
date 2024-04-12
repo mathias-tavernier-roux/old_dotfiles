@@ -50,7 +50,7 @@
       brightnessctl
       rofi
       rofi-bluetooth
-      (pkgs.callPackage ./rofi/rofi-wifi-menu { })
+      (pkgs.callPackage ./rofi/rofi-wpa { })
       (pkgs.callPackage ./rofi/rofi-mixer { })
       waybar
       libnotify
