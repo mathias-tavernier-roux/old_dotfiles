@@ -209,12 +209,14 @@ get_wireguard() {
 
     vpn=$(run_rofi "${vpn_list::-2}")
     vpn_name=$(echo "${vpn}" | cut -d ' ' -f 2)
+    vpn_icon=$(echo "${vpn}" | cut -d ' ' -f 1)
+    echo ${vpn_name}
 
     if [ "${vpn}x" == "x" ]; then
       exit 0
     fi
 
-    if [ "$(echo ${vpn_name} | cut -d ' ' -f 1 2> /dev/null)" == "" ];then
+    if [ "$(vpn_icon)" == "" ];then
       sudo wg-quick up ${vpn_name}
     else
       sudo wg-quick down ${vpn_name}
