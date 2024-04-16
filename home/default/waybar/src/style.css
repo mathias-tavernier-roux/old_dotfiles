@@ -13,6 +13,7 @@
 }
 
 #custom-vm,
+#keyboard-state,
 #workspaces,
 #workspaces button,
 #tray,
@@ -26,7 +27,6 @@ label:focus,
 #bluetooth,
 #network,
 #cpu,
-#keyboard-state,
 #memory,
 #custom-media,
 #mode,
@@ -47,13 +47,13 @@ label:focus,
 }
 
 #custom-vm,
+#keyboard-state,
 #custom-power-menu,
 #custom-launcher,
 #clock,
 #tray,
 #workspaces,
 #cpu,
-#keyboard-state,
 #memory,
 #battery.charging,
 #battery.critical,
@@ -86,11 +86,10 @@ label:focus,
 #tray,
 #workspaces,
 #cpu,
-#keyboard-state,
 #memory,
 #custom-launcher,
 #clock,
-#network {
+#keyboard-state {
   padding-left: 14px;
 }
 
@@ -103,7 +102,6 @@ label:focus,
 tooltip,
 label:focus,
 #cpu,
-#keyboard-state,
 #memory,
 #custom-media,
 #mode,
@@ -132,8 +130,8 @@ label:focus,
 }
 
 #custom-vm,
-#cpu,
 #keyboard-state,
+#cpu,
 #memory,
 #idle_inhibitor.activated,
 #custom-lock,
@@ -190,7 +188,6 @@ window#waybar.hidden {
 #custom-lock,
 #workspaces,
 #cpu,
-#keyboard-state,
 #memory,
 #custom-media,
 #mode,
@@ -226,7 +223,7 @@ window#waybar.hidden {
   border-radius: 7px 23px 7px 23px;
 }
 
-#network {
+#keyboard-state {
   border-radius: 7px 0px 0px 23px;
 }
 
