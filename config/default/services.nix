@@ -175,7 +175,6 @@
   # ------------------------------------------------------------------ #
   networking = {
     hostName = "${hostname}";
-    interfaces.eth0.useDHCP = true;
     wireless = {
       enable = true;
       userControlled.enable = true;
