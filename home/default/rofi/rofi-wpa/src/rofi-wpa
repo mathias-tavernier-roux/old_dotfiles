@@ -172,7 +172,7 @@ connect() {
       fi
     fi
 
-    sleep 4
+    sleep 8
     curent=$(
       wpa_cli status \
         | grep ssid \
