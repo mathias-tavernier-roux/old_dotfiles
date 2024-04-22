@@ -29,10 +29,6 @@
     stateVersion = "23.11";
   };
   # ----------------------------------------------------------------- #
-  environment.etc = {
-    "resolv.conf".text = "nameserver 1.1.1.1\nnameserver 1.0.0.1\n";
-  };
-  # ----------------------------------------------------------------- #
   documentation.dev.enable = true;
   nix = {
     gc = {
