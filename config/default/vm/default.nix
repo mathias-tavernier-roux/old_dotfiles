@@ -239,6 +239,7 @@ then {
           "{{ vm.name }}"
           "{{ ssdEmulation }}"
           "{{ osUrl }}"
+          "{{ vm.uuid }}"
         ] [
           (toString vm.memory)
           (toString (vm.cores * vm.threads))
@@ -251,6 +252,7 @@ then {
           vm.name
           ssdEmulation
           osUrl
+          vm.uuid
         ] (builtins.readFile ./src/template.xml)
       );
 
@@ -267,6 +269,7 @@ then {
           "{{ virtioIso }}"
           "{{ osUrl }}"
           "{{ vm.isoName }}"
+          "{{ vm.uuidSetup }}"
         ] [
           (toString vm.memory)
           (toString (vm.cores * vm.threads))
@@ -279,6 +282,7 @@ then {
           virtioIso
           osUrl
           vm.isoName
+          vm.uuidSetup
         ] (builtins.readFile ./src/template-setup.xml)
       );
 
@@ -295,9 +299,9 @@ then {
         chmod 755 /var/lib/libvirt/{hooks,qemu,storage}
 
         if [ ! -f ${vm.diskPath}/${vm.name}.qcow2 ]; then
-          # qemu-img create \
-          #  -f qcow2 ${vm.diskPath}/${vm.name}.qcow2 \
-          #  ${(toString vm.diskSize)}G
+           qemu-img create \
+            -f qcow2 ${vm.diskPath}/${vm.name}.qcow2 \
+            ${(toString vm.diskSize)}G
 
           echo "test"
         fi
