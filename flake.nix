@@ -77,12 +77,12 @@
             ];
           }
           {
-            name = "parrot";
-            os = "parrot";
+            name = "pentest_os";
+            os = "pentest_os";
             uuid = "6e866206-4e3c-4daa-9407-2a443f5a374a";
             uuidSetup = "4259f5fb-0985-4505-b78a-82448eb34f27";
             ssdEmulation = true;
-            isoName = "parrot";
+            isoName = "pentest_os";
             cores = 5;
             threads = 2;
             memory = 20;
