@@ -10,7 +10,7 @@ source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
 # Theme Elements
-prompt='Screenshot'
+prompt='Choose VM'
 
 if [[ "$theme" == *'type-5'* ]]; then
 	list_col='1'
@@ -34,7 +34,7 @@ IFS=', ' read -r -a VMS <<< "${options}"
 rofi_cmd() {
 	rofi -theme-str "window {width: $win_width;}" \
 		-theme-str "listview {columns: $list_col; lines: $list_row;}" \
-		-theme-str 'textbox-prompt-colon {str: "";}' \
+		-theme-str 'textbox-prompt-colon {str: "";}' \
 		-dmenu \
 		-p "$prompt" \
 		-mesg "$mesg" \
