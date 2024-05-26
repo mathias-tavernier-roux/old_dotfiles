@@ -13,6 +13,7 @@
 }
 
 #custom-vm,
+#custom-wallpaper,
 #keyboard-state,
 #workspaces,
 #workspaces button,
@@ -47,6 +48,7 @@ label:focus,
 }
 
 #custom-vm,
+#custom-wallpaper,
 #keyboard-state,
 #custom-power-menu,
 #custom-launcher,
@@ -130,6 +132,7 @@ label:focus,
 }
 
 #custom-vm,
+#custom-wallpaper,
 #keyboard-state,
 #cpu,
 #memory,

@@ -51,6 +51,7 @@
       rofi
       rofi-bluetooth
       (pkgs.callPackage ./rofi/rofi-wpa { })
+      (pkgs.callPackage ./rofi/rofi-wallpaper { })
       (pkgs.callPackage ./rofi/rofi-mixer { })
       waybar
       libnotify

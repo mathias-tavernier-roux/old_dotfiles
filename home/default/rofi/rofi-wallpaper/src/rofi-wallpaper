@@ -1,0 +1,108 @@
+#!/usr/bin/env sh
+
+# Import Current Theme
+source "$HOME"/.config/rofi/applets/shared/theme.bash
+theme="$type/$style"
+
+# Theme Elements
+prompt='Edit Wallpaper'
+
+if [[ "$theme" == *'type-5'* ]]; then
+	list_col='1'
+	list_row='5'
+	win_width='520px'
+fi
+layout=`cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2`
+
+# Fonction pour appliquer le fond d'écran sélectionné
+apply_wallpaper() {
+  local WALLPAPER=$1
+
+  cpwrconf
+  rm -rf ~/.cache &
+  rm -rf ~/.config/wpg/schemes/* &
+
+  echo "$WALLPAPER"
+
+  convert \
+    ~/.config/background/"${WALLPAPER}" \
+    -filter Gaussian -blur 0x32 \
+    ~/.config/background.png &
+
+  wpg -a ~/.config/background/"${WALLPAPER}"
+  wpg -A "${WALLPAPER}"
+  wpg -s "${WALLPAPER}"
+  source ~/.cache/wal/colors.sh
+
+  # Replace color with #
+  FILES=(
+    ~/.config/rofi/themes/pywal.rasi
+    ~/.config/rofi/applets/type-5/style-3.rasi
+    ~/.config/waybar/style.css
+  )
+
+  for FILE in "${FILES[@]}"; do
+    sed -i \
+      -e "s/{{ background }}/${background}/g" \
+      -e "s/{{ foreground }}/${foreground}/g" \
+      -e "s/{{ color1 }}/${color2}/g" \
+      -e "s/{{ color2 }}/${color1}/g" \
+      -e "s/{{ color3 }}/${color3}/g" \
+      -e "s/{{ color4 }}/${color4}/g" "${FILE}" &
+  done
+
+  # Replace color without #
+  source <(sed "s/#//g" ~/.cache/wal/colors.sh)
+
+  FILES=(
+    ~/.config/hypr/color.conf
+    ~/.local/bin/lockscreen
+  )
+
+  for FILE in "${FILES[@]}"; do
+    sed -i \
+      -e "s/{{ background }}/${background}/g" \
+      -e "s/{{ foreground }}/${foreground}/g" \
+      -e "s/{{ color1 }}/${color2}/g" \
+      -e "s/{{ color2 }}/${color1}/g" \
+      -e "s/{{ color3 }}/${color3}/g" \
+      -e "s/{{ color4 }}/${color4}/g" "${FILE}" &
+  done
+
+  pkill -f swaybg &
+  pkill -f waybar
+
+  swaybg -m fill -i ~/.config/background/"${WALLPAPER}" &
+  hyprctl reload &
+  waybar &
+  cp ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf &
+}
+
+rofi_cmd() {
+	rofi -theme-str "window {width: $win_width;}" \
+		-theme-str "listview {columns: $list_col; lines: $list_row;}" \
+		-theme-str 'textbox-prompt-colon {str: "󱍜";}' \
+    -dmenu \
+		-p "$prompt" \
+		-mesg "$mesg" \
+		-markup-rows \
+		-theme ${theme}
+}
+
+main() {
+  # List available backgrounds
+  BACKGROUNDS=$(ls ~/.config/background/)
+
+  # Use rofi to select a background
+  WALLPAPER=$(echo "${BACKGROUNDS}" | rofi_cmd)
+
+  if [ -z "$WALLPAPER" ]; then
+    echo "No wallpaper selected. Exiting..."
+    exit 1
+  fi
+
+  # Appel de la fonction pour appliquer le fond d'écran sélectionné
+  apply_wallpaper "${WALLPAPER}"
+}
+
+main > /dev/null 2>&1
